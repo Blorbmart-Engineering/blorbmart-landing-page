@@ -18,15 +18,28 @@ export default function Hero() {
 
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-sm mx-auto md:mx-0 text-sm text-gray-600">
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center justify-center w-8 h-8 bg-blue-50 text-blue-600 rounded-full">✓</span>
+                <span className="inline-flex items-center justify-center w-8 h-8 bg-blue-50 text-blue-600 rounded-full">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                    <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
                 Campus verified sellers
               </div>
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center justify-center w-8 h-8 bg-blue-50 text-blue-600 rounded-full">⚡</span>
+                <span className="inline-flex items-center justify-center w-8 h-8 bg-blue-50 text-blue-600 rounded-full">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                    <path d="M13 2L3 14h7l-1 8L21 10h-7l-1-8z" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
                 Fast deliveries
               </div>
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center justify-center w-8 h-8 bg-blue-50 text-blue-600 rounded-full">🔒</span>
+                <span className="inline-flex items-center justify-center w-8 h-8 bg-blue-50 text-blue-600 rounded-full">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                    <rect x="3" y="11" width="18" height="10" rx="2" stroke="currentColor" strokeWidth="2" />
+                    <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
                 Secure payments
               </div>
             </div>
