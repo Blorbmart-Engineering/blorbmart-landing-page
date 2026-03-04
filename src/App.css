@@ -1,7 +1,8 @@
 #root {
+  --header-h: 4rem;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: calc(var(--header-h) + 1rem) 2rem 2rem;
   text-align: center;
 }
 
