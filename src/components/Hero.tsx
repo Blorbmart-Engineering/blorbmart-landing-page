@@ -1,3 +1,5 @@
+import SplitCarousel from './SplitCarousel'
+
 export default function Hero() {
   return (
     <section className="bg-white">
@@ -46,15 +48,8 @@ export default function Hero() {
           </div>
 
           <div className="flex justify-center md:justify-end">
-            <div className="w-full max-w-md bg-gradient-to-br from-blue-50 to-white rounded-xl p-6 shadow-lg">
-              <svg className="w-full h-64 object-cover rounded-md" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="600" height="400" rx="16" fill="#EFF6FF" />
-                <g transform="translate(40,40)">
-                  <rect x="0" y="0" width="220" height="120" rx="8" fill="#1E3A8A" opacity="0.15" />
-                  <rect x="240" y="0" width="220" height="120" rx="8" fill="#1E3A8A" opacity="0.08" />
-                  <rect x="0" y="140" width="460" height="200" rx="8" fill="#BFDBFE" />
-                </g>
-              </svg>
+            <div className="w-full max-w-md">
+              <SplitCarousel />
             </div>
           </div>
         </div>

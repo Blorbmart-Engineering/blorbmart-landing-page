@@ -19,12 +19,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-4">
             <a href="#" className="flex items-center gap-3 no-underline">
-              <div className="flex items-center justify-center w-10 h-10 rounded-md bg-white/10">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                  <path d="M4 7h16v2H4z" fill="white" opacity="0.95"/>
-                  <path d="M4 11h10v2H4z" fill="white" opacity="0.8"/>
-                </svg>
-              </div>
+              <img src="/logo.png" alt="Blorbmart logo" className="w-10 h-10 bg-white rounded-full p-1" />
               <div className="leading-none">
                 <div className="font-semibold text-lg">Blorbmart</div>
                 <div className="text-xs text-white/80">Campus Marketplace</div>
