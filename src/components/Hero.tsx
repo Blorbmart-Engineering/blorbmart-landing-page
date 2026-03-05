@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 type Slide = {
   title: string
   subtitle: string
-  tag: string
+  tag: string            // text shown in the pill (no emoji)
+  icon: React.ReactNode  // SVG icon to precede the tag text
   image: string
   imageAlt: string
   accent: string
@@ -14,7 +15,14 @@ const slides: Slide[] = [
   {
     title: 'Fresh campus finds',
     subtitle: 'New items posted every hour',
-    tag: '🛒 Marketplace',
+    tag: 'Marketplace',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="9" cy="21" r="1" fill="currentColor"/>
+        <circle cx="20" cy="21" r="1" fill="currentColor"/>
+      </svg>
+    ),
     image: '/18132.jpg',
     imageAlt: 'students with items',
     accent: '#3b82f6',
@@ -22,7 +30,13 @@ const slides: Slide[] = [
   {
     title: 'Sell in 60 seconds',
     subtitle: 'List your unused gear instantly',
-    tag: '📦 Sell',
+    tag: 'Sell',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <path d="M3 9l9-5 9 5v8a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M3 9l9 5 9-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
     image: '/2149220667.jpg',
     imageAlt: 'student listing item',
     accent: '#8b5cf6',
@@ -30,7 +44,13 @@ const slides: Slide[] = [
   {
     title: 'Delivered between classes',
     subtitle: 'Campus riders on standby',
-    tag: '🚀 Delivery',
+    tag: 'Delivery',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <path d="M2 16l4 4 8-8-4-4-8 8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M15 4l5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
     image: '/49737.jpg',
     imageAlt: 'rider delivering',
     accent: '#06b6d4',
@@ -71,7 +91,7 @@ function PremiumCarousel() {
 
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const slide = slides[index]
 
@@ -154,8 +174,12 @@ function PremiumCarousel() {
               fontWeight: 600,
               color: 'white',
               letterSpacing: '0.02em',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 4,
             }}>
-              {slide.tag}
+              {slide.icon}
+              <span>{slide.tag}</span>
             </div>
 
             {/* Slide number */}
@@ -305,9 +329,9 @@ export default function Hero() {
           background: #070c1a;
           position: relative;
           overflow: hidden;
-          /* lift the section up to neutralise the top padding that
-             #root adds (header height + 1rem) */
-          margin-top: -5rem;
+          /* cancel only the extra 1rem of spacing from #root padding
+             so the section sits directly below the fixed header */
+          margin-top: -1rem;
           /* reserve space for the fixed header so the hero's
              content isn't pushed below the fold */
           min-height: calc(100vh - 4rem);
@@ -321,6 +345,65 @@ export default function Hero() {
           right: 50%;
           margin-left: -50vw;
           margin-right: -50vw;
+        }
+
+        .hero-content {
+          max-width: 1280px;
+          margin: 0 auto;
+          /* a bit more top gutter keeps text from colliding with header */
+          padding: 3rem 24px 24px;
+          width: 100%;
+          position: relative;
+          z-index: 1;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 64px;
+          align-items: center;
+        }
+
+        .hero-h1 {
+          font-size: clamp(2.4rem, 5vw, 3.6rem);
+        }
+        .hero-sub {
+          font-size: 1.05rem;
+        }
+
+        .hero-cta {
+          display: flex;
+        }
+
+        .hero-stats {
+          display: flex; align-items: center; gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+          .hero-content {
+            padding: 2rem 16px 24px;
+            gap: 32px;
+          }
+          .hero-h1 {
+            font-size: clamp(2rem, 6vw, 3rem);
+          }
+          .hero-sub {
+            font-size: 0.95rem;
+          }
+          .hero-cta {
+            flex-direction: column;
+            align-items: stretch;
+          }
+          .hero-stats {
+            flex-direction: column;
+            gap: 24px;
+          }
+          .hero-carousel {
+            order: -1;
+          }
+          .slide-tag {
+            top: 8px;
+            left: 8px;
+            font-size: 11px;
+            padding: 4px 10px;
+          }
         }
 
         /* Mesh gradient background */
@@ -417,20 +500,7 @@ export default function Hero() {
       `}</style>
 
       <section className="hero-section">
-        <div style={{
-          maxWidth: 1280,
-          margin: '0 auto',
-          /* smaller top padding so content is visible under the
-             fixed header and stays above the fold on laptops */
-          padding: '2rem 24px 24px',
-          width: '100%',
-          position: 'relative',
-          zIndex: 1,
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '64px',
-          alignItems: 'center',
-        }}>
+        <div className="hero-content">
 
           {/* ── LEFT COLUMN ── */}
           <div>

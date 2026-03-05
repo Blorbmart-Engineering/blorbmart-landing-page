@@ -56,13 +56,37 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden fixed inset-0 bg-blue-600/95 backdrop-blur-sm z-50">
-          <div className="pt-20 px-6">
-            <div className="flex flex-col space-y-6">
+        // backdrop catches clicks to close the menu
+        <div
+          className="md:hidden fixed inset-0 bg-blue-600/95 backdrop-blur-sm z-50"
+          onClick={() => setOpen(false)}
+        >
+          <div className="pt-20 px-6" onClick={(e) => e.stopPropagation()}>
+            <div className="flex justify-end">
+              <button
+                onClick={() => setOpen(false)}
+                aria-label="Close menu"
+                className="p-2 rounded-md text-white/90 hover:bg-white/10"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="pt-6 flex flex-col space-y-6">
               {links.map((l) => (
-                <a key={l.label} href={l.href} className="text-white text-lg font-medium">{l.label}</a>
+                <a
+                  key={l.label}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="text-white text-lg font-medium"
+                >{l.label}</a>
               ))}
-              <a href="#" className="mt-2 inline-block px-6 py-3 bg-white text-blue-600 rounded-md font-semibold w-max">Get Started</a>
+              <a
+                href="#"
+                onClick={() => setOpen(false)}
+                className="mt-2 inline-block px-6 py-3 bg-white text-blue-600 rounded-md font-semibold w-max"
+              >Get Started</a>
             </div>
           </div>
         </div>

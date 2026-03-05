@@ -237,7 +237,8 @@ export default function About() {
         .float-badge-icon {
           width: 42px;
           height: 42px;
-          background: linear-gradient(135deg, #2563eb, #7c3aed);
+          /* use a solid color rather than a gradient for the badge */
+          background: #2563eb;
           border-radius: 10px;
           display: flex;
           align-items: center;
