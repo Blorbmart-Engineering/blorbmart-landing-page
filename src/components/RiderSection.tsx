@@ -1,32 +1,32 @@
 const riderFeatures = [
   {
-    title: 'Flexible Schedule',
-    description: 'Work when you want, around your classes and studies',
+    title: 'Flexible student schedule',
+    description: 'Deliver before lectures, after classes, or whenever your timetable allows.',
     accent: '#2563eb',
   },
   {
-    title: 'Earn Per Delivery',
-    description: 'Transparent pricing with instant payouts after each delivery',
+    title: 'Earn per completed trip',
+    description: 'Campus riders get clear delivery tasks and straightforward earning opportunities.',
     accent: '#0f766e',
   },
   {
-    title: 'Campus Navigation',
-    description: 'Deliver within familiar campus grounds, with no complex routes',
+    title: 'Short on-campus routes',
+    description: 'Stay within familiar university environments instead of handling complex city-wide logistics.',
     accent: '#7c3aed',
   },
   {
-    title: 'Community Impact',
-    description: 'Help fellow students while building your reputation',
+    title: 'Support the campus economy',
+    description: 'Help student buyers and sellers complete orders while building your local reputation.',
     accent: '#ea580c',
   },
 ]
 
 const riderRequirements = [
   'Valid student ID',
-  'Smartphone with data',
-  'Bicycle or scooter',
-  'Available 10+ hours/week',
-  'Good knowledge of campus',
+  'Smartphone with internet',
+  'Bike, scooter, or fast campus mobility',
+  'Free time during the week',
+  'Good knowledge of campus locations',
 ]
 
 export default function RiderSection() {
@@ -43,7 +43,6 @@ export default function RiderSection() {
           overflow: hidden;
           font-family: 'DM Sans', sans-serif;
         }
-
         .rider-section::before {
           content: '';
           position: absolute;
@@ -55,14 +54,12 @@ export default function RiderSection() {
           mask-image: linear-gradient(180deg, rgba(0,0,0,0.28), transparent 95%);
           pointer-events: none;
         }
-
         .rider-shell {
           max-width: 1200px;
           margin: 0 auto;
           position: relative;
           z-index: 1;
         }
-
         .rider-top {
           display: grid;
           grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
@@ -70,7 +67,6 @@ export default function RiderSection() {
           align-items: center;
           margin-bottom: 28px;
         }
-
         .rider-tag {
           display: inline-flex;
           align-items: center;
@@ -79,7 +75,6 @@ export default function RiderSection() {
           border-radius: 999px;
           background: rgba(255,255,255,0.64);
           border: 1px solid rgba(255,255,255,0.8);
-          backdrop-filter: blur(16px);
           box-shadow: 0 12px 28px rgba(148,163,184,0.16), inset 0 1px 0 rgba(255,255,255,0.95);
           color: #0891b2;
           font-size: 12px;
@@ -89,7 +84,6 @@ export default function RiderSection() {
           width: fit-content;
           margin-bottom: 18px;
         }
-
         .rider-title {
           margin: 0;
           font-family: 'Sora', sans-serif;
@@ -99,7 +93,6 @@ export default function RiderSection() {
           color: #0f172a;
           max-width: 720px;
         }
-
         .rider-copy {
           margin: 18px 0 0;
           color: #64748b;
@@ -107,19 +100,16 @@ export default function RiderSection() {
           line-height: 1.75;
           max-width: 680px;
         }
-
-        .rider-visual {
-          border-radius: 32px;
-          padding: 18px;
-          background: rgba(255,255,255,0.58);
+        .rider-visual,
+        .rider-feature-card,
+        .rider-story,
+        .rider-requirements {
+          border-radius: 30px;
+          padding: 26px;
+          background: rgba(255,255,255,0.6);
           border: 1px solid rgba(255,255,255,0.82);
-          backdrop-filter: blur(18px);
-          box-shadow:
-            18px 18px 42px rgba(148,163,184,0.16),
-            -12px -12px 24px rgba(255,255,255,0.76),
-            inset 0 1px 0 rgba(255,255,255,0.96);
+          box-shadow: 18px 18px 40px rgba(148,163,184,0.16), -12px -12px 24px rgba(255,255,255,0.76), inset 0 1px 0 rgba(255,255,255,0.96);
         }
-
         .rider-visual img {
           display: block;
           width: 100%;
@@ -127,7 +117,6 @@ export default function RiderSection() {
           object-fit: cover;
           border-radius: 24px;
         }
-
         .rider-visual-note {
           display: flex;
           align-items: center;
@@ -135,18 +124,15 @@ export default function RiderSection() {
           gap: 14px;
           padding: 16px 6px 4px;
         }
-
         .rider-visual-note strong {
           display: block;
           font-family: 'Sora', sans-serif;
           color: #0f172a;
         }
-
         .rider-visual-note span {
           color: #64748b;
           font-size: 0.95rem;
         }
-
         .rider-pill {
           display: inline-flex;
           align-items: center;
@@ -157,31 +143,14 @@ export default function RiderSection() {
           color: white;
           font-size: 0.85rem;
           font-weight: 700;
-          box-shadow: 0 12px 26px rgba(37,99,235,0.22);
           white-space: nowrap;
         }
-
         .rider-feature-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 20px;
           margin-bottom: 26px;
         }
-
-        .rider-feature-card,
-        .rider-story,
-        .rider-requirements {
-          border-radius: 30px;
-          padding: 26px;
-          background: rgba(255,255,255,0.6);
-          border: 1px solid rgba(255,255,255,0.82);
-          backdrop-filter: blur(18px);
-          box-shadow:
-            18px 18px 40px rgba(148,163,184,0.16),
-            -12px -12px 24px rgba(255,255,255,0.76),
-            inset 0 1px 0 rgba(255,255,255,0.96);
-        }
-
         .rider-feature-icon {
           width: 52px;
           height: 52px;
@@ -191,9 +160,7 @@ export default function RiderSection() {
           justify-content: center;
           color: white;
           margin-bottom: 18px;
-          box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 16px 28px rgba(15,23,42,0.15);
         }
-
         .rider-feature-card h3,
         .rider-story h3,
         .rider-requirements h3 {
@@ -202,26 +169,22 @@ export default function RiderSection() {
           color: #0f172a;
           font-size: 1.25rem;
         }
-
         .rider-feature-card p,
         .rider-story p {
           margin: 0;
           color: #64748b;
           line-height: 1.75;
         }
-
         .rider-bottom {
           display: grid;
           grid-template-columns: minmax(0, 1fr) minmax(320px, 0.88fr);
           gap: 22px;
         }
-
         .rider-requirement-list {
           display: grid;
           gap: 12px;
           margin-bottom: 22px;
         }
-
         .rider-requirement-item {
           display: flex;
           align-items: center;
@@ -233,7 +196,6 @@ export default function RiderSection() {
           color: #334155;
           font-weight: 500;
         }
-
         .rider-check {
           width: 24px;
           height: 24px;
@@ -244,9 +206,7 @@ export default function RiderSection() {
           flex-shrink: 0;
           background: linear-gradient(135deg, #2563eb, #0891b2);
           color: white;
-          box-shadow: 0 10px 20px rgba(37,99,235,0.22);
         }
-
         .rider-cta {
           display: flex;
           align-items: center;
@@ -255,7 +215,6 @@ export default function RiderSection() {
           flex-wrap: wrap;
           padding-top: 6px;
         }
-
         .rider-cta-copy strong {
           display: block;
           font-family: 'Sora', sans-serif;
@@ -263,12 +222,10 @@ export default function RiderSection() {
           font-size: 1.05rem;
           margin-bottom: 4px;
         }
-
         .rider-cta-copy span {
           display: block;
           color: #64748b;
         }
-
         .rider-button {
           display: inline-flex;
           align-items: center;
@@ -280,13 +237,7 @@ export default function RiderSection() {
           text-decoration: none;
           font-weight: 700;
           box-shadow: 0 16px 34px rgba(37,99,235,0.26);
-          transition: transform 0.2s ease;
         }
-
-        .rider-button:hover {
-          transform: translateY(-2px);
-        }
-
         @media (max-width: 960px) {
           .rider-top,
           .rider-feature-grid,
@@ -294,27 +245,22 @@ export default function RiderSection() {
             grid-template-columns: 1fr;
           }
         }
-
         @media (max-width: 640px) {
           .rider-section {
             padding: 80px 16px;
           }
-
           .rider-feature-card,
           .rider-story,
           .rider-requirements,
           .rider-visual {
             padding: 22px;
           }
-
           .rider-visual img {
             height: 260px;
           }
-
           .rider-button {
             width: 100%;
           }
-
           .rider-visual-note {
             flex-direction: column;
             align-items: start;
@@ -322,35 +268,28 @@ export default function RiderSection() {
         }
       `}</style>
 
-      <section className="rider-section" id="rider-section">
+      <section className="rider-section" id="riders" aria-labelledby="riders-heading">
         <div className="rider-shell">
           <div className="rider-top">
             <div>
               <div className="rider-tag">
-                <span
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: '999px',
-                    background: '#0891b2',
-                    boxShadow: '0 0 0 6px rgba(8,145,178,0.12)',
-                  }}
-                />
-                Rider network
+                <span style={{ width: 8, height: 8, borderRadius: '999px', background: '#0891b2', boxShadow: '0 0 0 6px rgba(8,145,178,0.12)' }} />
+                Riders
               </div>
-              <h2 className="rider-title">Become a Campus Rider</h2>
+              <h2 id="riders-heading" className="rider-title">Earn money as a campus rider</h2>
               <p className="rider-copy">
-                Join our team of campus riders and earn money on your schedule. Deliver packages within the university
-                campus and help build the campus economy.
+                Blorbmart creates delivery opportunities for students who want flexible work inside their university.
+                Riders help power the campus marketplace by moving orders quickly between hostels, lecture halls, and
+                student communities.
               </p>
             </div>
 
             <div className="rider-visual">
-              <img src="/49737.jpg" alt="Campus rider delivering on campus" loading="lazy" decoding="async" />
+              <img src="/49737.jpg" alt="Student rider making a Blorbmart delivery on campus" loading="lazy" decoding="async" />
               <div className="rider-visual-note">
                 <div>
                   <strong>Fast campus deliveries</strong>
-                  <span>Shorter routes, familiar surroundings, smoother handoffs.</span>
+                  <span>Short routes, clear drop-offs, and flexible student work.</span>
                 </div>
                 <div className="rider-pill">50+ Active Riders</div>
               </div>
@@ -360,18 +299,9 @@ export default function RiderSection() {
           <div className="rider-feature-grid">
             {riderFeatures.map((feature) => (
               <article key={feature.title} className="rider-feature-card">
-                <div
-                  className="rider-feature-icon"
-                  style={{ background: `linear-gradient(135deg, ${feature.accent}, ${feature.accent}cc)` }}
-                >
+                <div className="rider-feature-icon" style={{ background: `linear-gradient(135deg, ${feature.accent}, ${feature.accent}cc)` }}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M12 2v20M2 12h20"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M12 2v20M2 12h20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 <h3>{feature.title}</h3>
@@ -382,28 +312,21 @@ export default function RiderSection() {
 
           <div className="rider-bottom">
             <div className="rider-story">
-              <h3>Why Join as a Rider?</h3>
+              <h3>Why join the Blorbmart rider network</h3>
               <p>
-                As a campus rider, you are the backbone of our delivery network. You will help students get what they
-                need quickly while earning money on your own terms. It is ideal for students looking for flexible work
-                that fits around their academic schedule.
+                Riders are a core part of the student marketplace. The role is ideal for students who want a flexible
+                earning option while supporting campus commerce and helping buyers receive orders faster.
               </p>
             </div>
 
             <div className="rider-requirements">
-              <h3>Requirements</h3>
+              <h3>Basic rider requirements</h3>
               <div className="rider-requirement-list">
                 {riderRequirements.map((requirement) => (
                   <div key={requirement} className="rider-requirement-item">
                     <span className="rider-check">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                        <path
-                          d="M5 12.5l4.2 4.2L19 7"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
+                        <path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
                     <span>{requirement}</span>
@@ -413,11 +336,10 @@ export default function RiderSection() {
 
               <div className="rider-cta">
                 <div className="rider-cta-copy">
-                  <strong>Become a Rider</strong>
-                  <span>50+ Active Riders</span>
-                  <span>Rider App Available</span>
+                  <strong>Apply as a rider</strong>
+                  <span>Flexible delivery work for students.</span>
                 </div>
-                <a href="#" className="rider-button">Apply as Rider</a>
+                <a href="/#download" className="rider-button">Become a Rider</a>
               </div>
             </div>
           </div>

@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 
-
 type Slide = {
   title: string
   subtitle: string
-  tag: string            // text shown in the pill (no emoji)
-  icon: React.ReactNode  // SVG icon to precede the tag text
+  tag: string
+  icon: React.ReactNode
   image: string
   imageAlt: string
   accent: string
@@ -14,54 +13,51 @@ type Slide = {
 const slides: Slide[] = [
   {
     title: 'Fresh campus finds',
-    subtitle: 'New items posted every hour',
+    subtitle: 'New items posted every hour for student buyers',
     tag: 'Marketplace',
     icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="9" cy="21" r="1" fill="currentColor"/>
-        <circle cx="20" cy="21" r="1" fill="currentColor"/>
+        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="9" cy="21" r="1" fill="currentColor" />
+        <circle cx="20" cy="21" r="1" fill="currentColor" />
       </svg>
     ),
     image: '/18132.jpg',
-    imageAlt: 'students with items',
+    imageAlt: 'Students browsing products in the Blorbmart campus marketplace',
     accent: '#3b82f6',
   },
   {
     title: 'Sell in 60 seconds',
-    subtitle: 'List your unused gear instantly',
+    subtitle: 'Students can list products and services fast on campus',
     tag: 'Sell',
     icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-        <path d="M3 9l9-5 9 5v8a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M3 9l9 5 9-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M3 9l9-5 9 5v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M3 9l9 5 9-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     image: '/2149220667.jpg',
-    imageAlt: 'student listing item',
+    imageAlt: 'Student seller listing an item on Blorbmart',
     accent: '#8b5cf6',
   },
   {
     title: 'Delivered between classes',
-    subtitle: 'Campus riders on standby',
+    subtitle: 'Campus riders move orders across university grounds',
     tag: 'Delivery',
     icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-        <path d="M2 16l4 4 8-8-4-4-8 8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M15 4l5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M2 16l4 4 8-8-4-4-8 8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M15 4l5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     image: '/49737.jpg',
-    imageAlt: 'rider delivering',
+    imageAlt: 'Campus rider delivering an order for Blorbmart',
     accent: '#06b6d4',
   },
 ]
 
 const DURATION = 4500
 
-/* ─────────────────────────────────────────────
-   CAROUSEL
-───────────────────────────────────────────── */
 function PremiumCarousel() {
   const [index, setIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
@@ -105,7 +101,7 @@ function PremiumCarousel() {
         }
         @keyframes scaleIn {
           from { transform: scale(1.06); opacity: 0.6; }
-          to   { transform: scale(1);    opacity: 1; }
+          to   { transform: scale(1); opacity: 1; }
         }
         .carousel-img-enter {
           animation: scaleIn 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
@@ -158,14 +154,8 @@ function PremiumCarousel() {
         }
       `}</style>
 
-      <div
-        className="w-full"
-        style={{ fontFamily: "'DM Sans', sans-serif" }}
-      >
-        {/* Card */}
+      <div className="w-full" style={{ fontFamily: "'DM Sans', sans-serif" }}>
         <div className="carousel-card">
-
-          {/* Image area */}
           <div style={{ position: 'relative', height: '280px', overflow: 'hidden' }}>
             <img
               key={index}
@@ -175,83 +165,83 @@ function PremiumCarousel() {
               fetchPriority={index === 0 ? 'high' : 'auto'}
               decoding="async"
               className="carousel-img-enter"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+            <div
               style={{
-                position: 'absolute', inset: 0,
-                width: '100%', height: '100%',
-                objectFit: 'cover',
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(to top, rgba(10,15,30,0.85) 0%, rgba(10,15,30,0.1) 50%, transparent 100%)',
               }}
             />
-            {/* gradient overlay */}
-            <div style={{
-              position: 'absolute', inset: 0,
-              background: 'linear-gradient(to top, rgba(10,15,30,0.85) 0%, rgba(10,15,30,0.1) 50%, transparent 100%)',
-            }} />
 
-            {/* Tag pill */}
-            <div className="slide-tag" key={`tag-${index}`} style={{
-              position: 'absolute', top: 16, left: 16,
-              background: 'rgba(0,0,0,0.55)',
-              backdropFilter: 'blur(8px)',
-              border: '1px solid rgba(255,255,255,0.12)',
-              borderRadius: '999px',
-              padding: '5px 12px',
-              fontSize: '12px',
-              fontWeight: 600,
-              color: 'white',
-              letterSpacing: '0.02em',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 4,
-            }}>
+            <div
+              className="slide-tag"
+              key={`tag-${index}`}
+              style={{
+                position: 'absolute',
+                top: 16,
+                left: 16,
+                background: 'rgba(0,0,0,0.55)',
+                backdropFilter: 'blur(8px)',
+                border: '1px solid rgba(255,255,255,0.12)',
+                borderRadius: '999px',
+                padding: '5px 12px',
+                fontSize: '12px',
+                fontWeight: 600,
+                color: 'white',
+                letterSpacing: '0.02em',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 4,
+              }}
+            >
               {slide.icon}
               <span>{slide.tag}</span>
             </div>
 
-            {/* Slide number */}
-            <div style={{
-              position: 'absolute', top: 16, right: 16,
-              fontSize: '11px', color: 'rgba(255,255,255,0.45)',
-              fontWeight: 600, letterSpacing: '0.1em',
-            }}>
+            <div
+              style={{
+                position: 'absolute',
+                top: 16,
+                right: 16,
+                fontSize: '11px',
+                color: 'rgba(255,255,255,0.45)',
+                fontWeight: 600,
+                letterSpacing: '0.1em',
+              }}
+            >
               {String(index + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
             </div>
           </div>
 
-          {/* Text content */}
           <div style={{ padding: '20px 24px 24px' }}>
             <div key={`text-${index}`} className="carousel-text-enter">
-              <div style={{
-                fontSize: '1.25rem',
-                fontWeight: 800,
-                color: 'white',
-                fontFamily: "'Sora', sans-serif",
-                lineHeight: 1.25,
-                marginBottom: 6,
-              }}>
+              <div
+                style={{
+                  fontSize: '1.25rem',
+                  fontWeight: 800,
+                  color: 'white',
+                  fontFamily: "'Sora', sans-serif",
+                  lineHeight: 1.25,
+                  marginBottom: 6,
+                }}
+              >
                 {slide.title}
               </div>
-              <div style={{
-                fontSize: '0.82rem',
-                color: 'rgba(255,255,255,0.5)',
-                lineHeight: 1.5,
-              }}>
-                {slide.subtitle}
-              </div>
+              <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>{slide.subtitle}</div>
             </div>
 
-            {/* Progress + dots row */}
-            <div style={{
-              marginTop: 20,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 12,
-            }}>
-              {/* Progress bar */}
-              <div style={{
-                flex: 1, height: 3,
-                background: 'rgba(255,255,255,0.1)',
-                borderRadius: 999, overflow: 'hidden',
-              }}>
+            <div style={{ marginTop: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div
+                style={{
+                  flex: 1,
+                  height: 3,
+                  background: 'rgba(255,255,255,0.1)',
+                  borderRadius: 999,
+                  overflow: 'hidden',
+                }}
+              >
                 {!isMobile && (
                   <div
                     key={`progress-${index}`}
@@ -265,7 +255,6 @@ function PremiumCarousel() {
                 )}
               </div>
 
-              {/* Dots */}
               <div style={{ display: 'flex', gap: 6 }}>
                 {slides.map((_, i) => (
                   <button
@@ -278,7 +267,9 @@ function PremiumCarousel() {
                       height: 6,
                       borderRadius: 999,
                       background: i === index ? slide.accent : 'rgba(255,255,255,0.2)',
-                      border: 'none', cursor: 'pointer', padding: 0,
+                      border: 'none',
+                      cursor: 'pointer',
+                      padding: 0,
                     }}
                   />
                 ))}
@@ -287,17 +278,14 @@ function PremiumCarousel() {
           </div>
         </div>
 
-        {/* Trust chips below carousel */}
-        <div style={{
-          display: 'flex', gap: 10, marginTop: 16, flexWrap: 'wrap',
-        }}>
+        <div style={{ display: 'flex', gap: 10, marginTop: 16, flexWrap: 'wrap' }}>
           {[
             {
               icon: (
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M17 8V7a5 5 0 0 0-10 0v1" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
-                  <rect x="7" y="8" width="10" height="8" rx="2" stroke="currentColor" strokeWidth={2}/>
+                  <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M17 8V7a5 5 0 0 0-10 0v1" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                  <rect x="7" y="8" width="10" height="8" rx="2" stroke="currentColor" strokeWidth={2} />
                 </svg>
               ),
               text: 'Verified students',
@@ -305,7 +293,7 @@ function PremiumCarousel() {
             {
               icon: (
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               ),
               text: 'Live listings',
@@ -313,8 +301,8 @@ function PremiumCarousel() {
             {
               icon: (
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="12" cy="9" r="2" fill="currentColor"/>
+                  <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="12" cy="9" r="2" fill="currentColor" />
                 </svg>
               ),
               text: 'On-campus only',
@@ -331,16 +319,10 @@ function PremiumCarousel() {
   )
 }
 
-
-/* ─────────────────────────────────────────────
-   HERO
-───────────────────────────────────────────── */
 export default function Hero() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap');
-
         .hero-section {
           background: #070c1a;
           position: relative;
@@ -359,7 +341,7 @@ export default function Hero() {
           position: relative;
           z-index: 1;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          grid-template-columns: minmax(0, 1.1fr) minmax(360px, 460px);
           gap: 64px;
           align-items: center;
         }
@@ -381,6 +363,7 @@ export default function Hero() {
 
         @media (max-width: 768px) {
           .hero-content {
+            grid-template-columns: 1fr;
             padding: 1.5rem 16px 24px;
             gap: 32px;
           }
@@ -397,6 +380,7 @@ export default function Hero() {
           .hero-stats {
             flex-direction: column;
             gap: 24px;
+            align-items: flex-start;
           }
           .slide-tag {
             top: 8px;
@@ -406,7 +390,13 @@ export default function Hero() {
           }
         }
 
-        /* Mesh gradient background */
+        @media (max-width: 1100px) and (min-width: 769px) {
+          .hero-content {
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
+            gap: 40px;
+          }
+        }
+
         .hero-section::before {
           content: '';
           position: absolute;
@@ -418,7 +408,6 @@ export default function Hero() {
           pointer-events: none;
         }
 
-        /* Subtle grid pattern */
         .hero-section::after {
           content: '';
           position: absolute;
@@ -499,91 +488,108 @@ export default function Hero() {
         .avatar-stack :first-child { margin-left: 0; }
       `}</style>
 
-      <section className="hero-section" id="home">
+      <section className="hero-section" id="home" aria-labelledby="hero-heading">
         <div className="hero-content">
-
-          {/* ── LEFT COLUMN ── */}
           <div>
-            {/* Badge */}
-            <div className="hero-badge" style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: 'rgba(37,99,235,0.15)',
-              border: '1px solid rgba(37,99,235,0.35)',
-              borderRadius: 999, padding: '6px 14px',
-              marginBottom: 28,
-            }}>
-              <span style={{
-                width: 7, height: 7, borderRadius: '50%',
-                background: '#3b82f6',
-                boxShadow: '0 0 8px #3b82f6',
-                display: 'inline-block',
-              }} />
-              <span style={{
-                fontSize: 12, fontWeight: 700, color: '#93c5fd',
-                letterSpacing: '0.07em', textTransform: 'uppercase',
-                fontFamily: "'DM Sans', sans-serif",
-              }}>
-                Now live on campus
-              </span>
-            </div>
+            <header>
+              <div
+                className="hero-badge"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  background: 'rgba(37,99,235,0.15)',
+                  border: '1px solid rgba(37,99,235,0.35)',
+                  borderRadius: 999,
+                  padding: '6px 14px',
+                  marginBottom: 28,
+                }}
+              >
+                <span
+                  style={{
+                    width: 7,
+                    height: 7,
+                    borderRadius: '50%',
+                    background: '#3b82f6',
+                    boxShadow: '0 0 8px #3b82f6',
+                    display: 'inline-block',
+                  }}
+                />
+                <span
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: '#93c5fd',
+                    letterSpacing: '0.07em',
+                    textTransform: 'uppercase',
+                    fontFamily: "'DM Sans', sans-serif",
+                  }}
+                >
+                  Nigeria student marketplace
+                </span>
+              </div>
 
-            {/* Headline */}
-            <h1 className="hero-h1" style={{
-              fontFamily: "'Sora', sans-serif",
-              fontSize: 'clamp(2.4rem, 5vw, 3.6rem)',
-              fontWeight: 900,
-              lineHeight: 1.08,
-              letterSpacing: '-0.03em',
-              color: 'white',
-              margin: 0,
-            }}>
-              Campus shopping,{' '}
-              <span style={{
-                background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
-                reimagined.
-              </span>
-            </h1>
+              <h1
+                id="hero-heading"
+                className="hero-h1"
+                style={{
+                  fontFamily: "'Sora', sans-serif",
+                  fontSize: 'clamp(2.4rem, 5vw, 3.6rem)',
+                  fontWeight: 900,
+                  lineHeight: 1.08,
+                  letterSpacing: '-0.03em',
+                  color: 'white',
+                  margin: 0,
+                }}
+              >
+                Blorbmart Campus Marketplace
+                <span
+                  style={{
+                    display: 'block',
+                    marginTop: 8,
+                    background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  Buy and sell on campus with ease.
+                </span>
+              </h1>
 
-            {/* Sub */}
-            <p className="hero-sub" style={{
-              marginTop: 20,
-              fontSize: '1.05rem',
-              color: 'rgba(255,255,255,0.5)',
-              lineHeight: 1.7,
-              maxWidth: 440,
-              fontFamily: "'DM Sans', sans-serif",
-            }}>
-              Blorbmart connects students, sellers, and riders — discover great deals, sell unused items, and get deliveries fast across campus.
-            </p>
+              <p
+                className="hero-sub"
+                style={{
+                  marginTop: 20,
+                  fontSize: '1.05rem',
+                  color: 'rgba(255,255,255,0.72)',
+                  lineHeight: 1.7,
+                  maxWidth: 560,
+                  fontFamily: "'DM Sans', sans-serif",
+                }}
+              >
+                Blorbmart is a campus marketplace where students can buy and sell items easily within their university.
+                This student buy and sell platform helps campus shoppers discover trusted sellers, compare prices, and
+                get fast deliveries from student riders.
+              </p>
+            </header>
 
-            {/* CTAs */}
-            <div className="hero-cta" style={{
-              display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 36,
-            }}>
-              <a href="#" className="btn-primary">
-                Get Started
+            <div className="hero-cta" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 36 }}>
+              <a href="/#download" className="btn-primary">
+                Download the App
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
-              <a href="#" className="btn-secondary">
+              <a href="/#how-it-works" className="btn-secondary">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor"/>
+                  <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor" />
                 </svg>
                 See how it works
               </a>
             </div>
 
-            {/* Social proof + stats */}
-            <div className="hero-stats" style={{
-              display: 'flex', alignItems: 'center', gap: 20,
-              marginTop: 40, flexWrap: 'wrap',
-            }}>
-              {/* Avatars */}
+            <div className="hero-stats" style={{ display: 'flex', alignItems: 'center', gap: 20, marginTop: 40, flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <div className="avatar-stack">
                   <div>AK</div>
@@ -593,36 +599,27 @@ export default function Hero() {
                 </div>
                 <div>
                   <div style={{ fontSize: 12, fontWeight: 700, color: 'white', fontFamily: "'Sora', sans-serif" }}>12,000+ students</div>
-                  <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', fontFamily: "'DM Sans', sans-serif" }}>already on Blorbmart</div>
+                  <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', fontFamily: "'DM Sans', sans-serif" }}>buying and selling on campus</div>
                 </div>
               </div>
 
               <div className="stat-divider" />
 
               <div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: 'white', fontFamily: "'Sora', sans-serif" }}>
-                  ⭐ 4.9 / 5.0
-                </div>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', fontFamily: "'DM Sans', sans-serif" }}>
-                  avg. rating
-                </div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: 'white', fontFamily: "'Sora', sans-serif" }}>4.9 / 5.0</div>
+                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', fontFamily: "'DM Sans', sans-serif" }}>student marketplace rating</div>
               </div>
 
               <div className="stat-divider" />
 
               <div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: 'white', fontFamily: "'Sora', sans-serif" }}>
-                  &lt; 20 min
-                </div>
-                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', fontFamily: "'DM Sans', sans-serif" }}>
-                  avg. delivery
-                </div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: 'white', fontFamily: "'Sora', sans-serif" }}>&lt; 20 min</div>
+                <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', fontFamily: "'DM Sans', sans-serif" }}>average campus delivery</div>
               </div>
             </div>
           </div>
 
-          {/* ── RIGHT COLUMN ── */}
-          <div className="hero-carousel" style={{ display: 'flex', justifyContent: 'center' }}>
+          <div className="hero-carousel" style={{ display: 'flex', justifyContent: 'center', alignSelf: 'start' }}>
             <div style={{ width: '100%', maxWidth: 420 }}>
               <PremiumCarousel />
             </div>

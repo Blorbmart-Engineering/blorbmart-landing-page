@@ -1,33 +1,33 @@
 const sellerFeatures = [
   {
-    title: 'Multi-Seller Marketplace',
-    description: 'Join hundreds of campus sellers already reaching thousands of students',
+    title: 'List products for students',
+    description: 'Sell fashion, gadgets, food, and everyday essentials to buyers already searching on campus.',
     accent: '#2563eb',
   },
   {
-    title: 'Verified Sellers',
-    description: 'Build trust with verified seller badges and transparent ratings',
+    title: 'Build trust with verification',
+    description: 'Verified seller profiles and clear ratings help your campus store stand out.',
     accent: '#0f766e',
   },
   {
-    title: 'Analytics & Management',
-    description: 'Track sales, manage inventory, and optimize your store performance',
+    title: 'Manage orders with less effort',
+    description: 'Track inventory, review demand, and respond to buyers from one seller dashboard.',
     accent: '#7c3aed',
   },
   {
-    title: 'Growth Tools',
-    description: 'Access promotional tools and insights to grow your campus business',
+    title: 'Grow repeat campus sales',
+    description: 'Use a dedicated marketplace built for students instead of relying only on social media posting.',
     accent: '#ea580c',
   },
 ]
 
 const sellerBenefits = [
   'Zero setup costs',
-  'Instant payments',
   'Campus-wide reach',
-  'Marketing support',
-  'Order management',
-  'Customer insights',
+  'Instant order alerts',
+  'Repeat student buyers',
+  'Fast rider delivery',
+  'Simple store management',
 ]
 
 export default function SellerSection() {
@@ -44,7 +44,6 @@ export default function SellerSection() {
           overflow: hidden;
           font-family: 'DM Sans', sans-serif;
         }
-
         .seller-section::before {
           content: '';
           position: absolute;
@@ -52,14 +51,12 @@ export default function SellerSection() {
           background: linear-gradient(135deg, rgba(255,255,255,0.45), rgba(255,255,255,0.1));
           pointer-events: none;
         }
-
         .seller-shell {
           max-width: 1200px;
           margin: 0 auto;
           position: relative;
           z-index: 1;
         }
-
         .seller-top {
           display: grid;
           grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
@@ -67,7 +64,6 @@ export default function SellerSection() {
           align-items: start;
           margin-bottom: 34px;
         }
-
         .seller-tag {
           display: inline-flex;
           align-items: center;
@@ -76,7 +72,6 @@ export default function SellerSection() {
           border-radius: 999px;
           background: rgba(255,255,255,0.64);
           border: 1px solid rgba(255,255,255,0.8);
-          backdrop-filter: blur(16px);
           box-shadow: 0 12px 28px rgba(148,163,184,0.18), inset 0 1px 0 rgba(255,255,255,0.95);
           color: #2563eb;
           font-size: 12px;
@@ -86,7 +81,6 @@ export default function SellerSection() {
           width: fit-content;
           margin-bottom: 18px;
         }
-
         .seller-title {
           margin: 0;
           font-family: 'Sora', sans-serif;
@@ -96,7 +90,6 @@ export default function SellerSection() {
           color: #0f172a;
           max-width: 720px;
         }
-
         .seller-copy {
           margin: 18px 0 0;
           color: #64748b;
@@ -104,19 +97,16 @@ export default function SellerSection() {
           line-height: 1.75;
           max-width: 680px;
         }
-
-        .seller-stat-card {
+        .seller-stat-card,
+        .seller-feature-card,
+        .seller-story,
+        .seller-benefits {
           border-radius: 28px;
           padding: 28px;
           background: rgba(255,255,255,0.62);
           border: 1px solid rgba(255,255,255,0.82);
-          backdrop-filter: blur(18px);
-          box-shadow:
-            18px 18px 42px rgba(148,163,184,0.16),
-            -12px -12px 24px rgba(255,255,255,0.78),
-            inset 0 1px 0 rgba(255,255,255,0.96);
+          box-shadow: 18px 18px 42px rgba(148,163,184,0.16), -12px -12px 24px rgba(255,255,255,0.78), inset 0 1px 0 rgba(255,255,255,0.96);
         }
-
         .seller-stat-card span {
           display: block;
           font-size: 0.76rem;
@@ -126,7 +116,6 @@ export default function SellerSection() {
           font-weight: 700;
           margin-bottom: 10px;
         }
-
         .seller-stat-card strong {
           display: block;
           font-family: 'Sora', sans-serif;
@@ -134,33 +123,19 @@ export default function SellerSection() {
           line-height: 1;
           color: #2563eb;
         }
-
-        .seller-stat-card p {
+        .seller-stat-card p,
+        .seller-feature-card p,
+        .seller-story p {
           margin: 10px 0 0;
           color: #475569;
           line-height: 1.65;
         }
-
         .seller-feature-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 20px;
           margin-bottom: 28px;
         }
-
-        .seller-feature-card {
-          border-radius: 28px;
-          padding: 24px;
-          background: rgba(255,255,255,0.58);
-          border: 1px solid rgba(255,255,255,0.82);
-          backdrop-filter: blur(18px);
-          box-shadow:
-            16px 16px 36px rgba(148,163,184,0.16),
-            -10px -10px 22px rgba(255,255,255,0.72),
-            inset 0 1px 0 rgba(255,255,255,0.95);
-          min-height: 200px;
-        }
-
         .seller-feature-icon {
           width: 52px;
           height: 52px;
@@ -170,63 +145,26 @@ export default function SellerSection() {
           justify-content: center;
           color: white;
           margin-bottom: 18px;
-          box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 16px 28px rgba(15,23,42,0.15);
         }
-
-        .seller-feature-card h3 {
+        .seller-feature-card h3,
+        .seller-story h3,
+        .seller-benefits h3 {
           margin: 0 0 10px;
           font-family: 'Sora', sans-serif;
           font-size: 1.1rem;
           color: #0f172a;
         }
-
-        .seller-feature-card p {
-          margin: 0;
-          color: #64748b;
-          line-height: 1.7;
-        }
-
         .seller-bottom {
           display: grid;
           grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
           gap: 22px;
         }
-
-        .seller-story,
-        .seller-benefits {
-          border-radius: 30px;
-          padding: 28px;
-          background: rgba(255,255,255,0.6);
-          border: 1px solid rgba(255,255,255,0.82);
-          backdrop-filter: blur(18px);
-          box-shadow:
-            18px 18px 40px rgba(148,163,184,0.16),
-            -12px -12px 24px rgba(255,255,255,0.74),
-            inset 0 1px 0 rgba(255,255,255,0.96);
-        }
-
-        .seller-story h3,
-        .seller-benefits h3 {
-          margin: 0 0 16px;
-          font-family: 'Sora', sans-serif;
-          font-size: 1.4rem;
-          color: #0f172a;
-        }
-
-        .seller-story p {
-          margin: 0;
-          color: #64748b;
-          line-height: 1.8;
-          font-size: 1rem;
-        }
-
         .seller-benefit-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 12px;
           margin-bottom: 22px;
         }
-
         .seller-benefit-item {
           display: flex;
           align-items: center;
@@ -238,7 +176,6 @@ export default function SellerSection() {
           color: #334155;
           font-weight: 500;
         }
-
         .seller-benefit-check {
           width: 24px;
           height: 24px;
@@ -249,9 +186,7 @@ export default function SellerSection() {
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          box-shadow: 0 8px 16px rgba(37,99,235,0.25);
         }
-
         .seller-cta {
           display: flex;
           align-items: center;
@@ -260,7 +195,6 @@ export default function SellerSection() {
           flex-wrap: wrap;
           padding-top: 6px;
         }
-
         .seller-cta-copy strong {
           display: block;
           font-family: 'Sora', sans-serif;
@@ -268,11 +202,9 @@ export default function SellerSection() {
           font-size: 1.05rem;
           margin-bottom: 4px;
         }
-
         .seller-cta-copy span {
           color: #64748b;
         }
-
         .seller-cta-button {
           display: inline-flex;
           align-items: center;
@@ -284,13 +216,7 @@ export default function SellerSection() {
           font-weight: 700;
           text-decoration: none;
           box-shadow: 0 16px 34px rgba(37,99,235,0.28);
-          transition: transform 0.2s ease;
         }
-
-        .seller-cta-button:hover {
-          transform: translateY(-2px);
-        }
-
         @media (max-width: 960px) {
           .seller-top,
           .seller-feature-grid,
@@ -299,70 +225,51 @@ export default function SellerSection() {
             grid-template-columns: 1fr;
           }
         }
-
         @media (max-width: 640px) {
           .seller-section {
             padding: 80px 16px 96px;
           }
-
           .seller-stat-card,
           .seller-feature-card,
           .seller-story,
           .seller-benefits {
             padding: 22px;
           }
-
           .seller-cta-button {
             width: 100%;
           }
         }
       `}</style>
 
-      <section className="seller-section" id="seller-section">
+      <section className="seller-section" id="sellers" aria-labelledby="sellers-heading">
         <div className="seller-shell">
           <div className="seller-top">
             <div>
               <div className="seller-tag">
-                <span
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: '999px',
-                    background: '#2563eb',
-                    boxShadow: '0 0 0 6px rgba(37,99,235,0.12)',
-                  }}
-                />
-                Seller growth
+                <span style={{ width: 8, height: 8, borderRadius: '999px', background: '#2563eb', boxShadow: '0 0 0 6px rgba(37,99,235,0.12)' }} />
+                Sellers
               </div>
-              <h2 className="seller-title">Become a Campus Seller</h2>
+              <h2 id="sellers-heading" className="seller-title">Sell products to students on campus</h2>
               <p className="seller-copy">
-                Turn your skills, products, or services into a thriving campus business. Join our multi-seller
-                marketplace and reach thousands of students instantly.
+                Blorbmart gives student entrepreneurs and campus vendors a focused marketplace where university buyers
+                already come to shop. Instead of chasing customers across multiple channels, sellers can list products,
+                receive orders, and grow a trusted campus business in one place.
               </p>
             </div>
 
             <div className="seller-stat-card">
-              <span>Start selling today</span>
+              <span>Campus seller growth</span>
               <strong>200+</strong>
-              <p>Active sellers already building visibility, orders, and repeat buyers across campus.</p>
+              <p>Active sellers are already reaching students inside their university communities through Blorbmart.</p>
             </div>
           </div>
 
           <div className="seller-feature-grid">
             {sellerFeatures.map((feature) => (
               <article key={feature.title} className="seller-feature-card">
-                <div
-                  className="seller-feature-icon"
-                  style={{ background: `linear-gradient(135deg, ${feature.accent}, ${feature.accent}cc)` }}
-                >
+                <div className="seller-feature-icon" style={{ background: `linear-gradient(135deg, ${feature.accent}, ${feature.accent}cc)` }}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M5 12h14M12 5l7 7-7 7"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 <h3>{feature.title}</h3>
@@ -373,28 +280,22 @@ export default function SellerSection() {
 
           <div className="seller-bottom">
             <div className="seller-story">
-              <h3>Why Sell on Blorbmart?</h3>
+              <h3>Why students sell on Blorbmart</h3>
               <p>
-                As a campus seller, you get access to a ready-made customer base of students who are actively looking
-                for products and services within their campus ecosystem. No need for expensive marketing or logistics.
-                We handle the hard parts so you can focus on what you do best.
+                This student marketplace helps campus sellers move stock faster, reach nearby buyers, and simplify
+                delivery. Whether you sell thrift fashion, gadgets, food, or creative services, Blorbmart is built to
+                support repeat purchases inside the university ecosystem.
               </p>
             </div>
 
             <div className="seller-benefits">
-              <h3>Seller Benefits</h3>
+              <h3>Seller benefits</h3>
               <div className="seller-benefit-grid">
                 {sellerBenefits.map((benefit) => (
                   <div key={benefit} className="seller-benefit-item">
                     <span className="seller-benefit-check">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                        <path
-                          d="M5 12.5l4.2 4.2L19 7"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
+                        <path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
                     <span>{benefit}</span>
@@ -404,10 +305,10 @@ export default function SellerSection() {
 
               <div className="seller-cta">
                 <div className="seller-cta-copy">
-                  <strong>Start Selling Today</strong>
-                  <span>200+ Active Sellers</span>
+                  <strong>Open a seller account</strong>
+                  <span>Start selling to students in minutes.</span>
                 </div>
-                <a href="#" className="seller-cta-button">Open Seller Account</a>
+                <a href="/#download" className="seller-cta-button">Start Selling</a>
               </div>
             </div>
           </div>

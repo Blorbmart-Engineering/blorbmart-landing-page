@@ -1,56 +1,54 @@
 export default function About() {
   const stats = [
-    { value: "12K+", label: "Active Students" },
-    { value: "3.2K", label: "Products Listed" },
-    { value: "98%", label: "Satisfaction Rate" },
-    { value: "50+", label: "Campus Riders" },
-  ];
+    { value: '12K+', label: 'Active Students' },
+    { value: '3.2K', label: 'Products Listed' },
+    { value: '98%', label: 'Satisfaction Rate' },
+    { value: '50+', label: 'Campus Riders' },
+  ]
 
   const features = [
     {
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
-      title: "Campus Verified Users",
-      desc: "Every account is tied to a verified student email — keeping the community safe and trusted.",
+      title: 'Verified Student Community',
+      desc: 'Every account is tied to a campus identity so buyers and sellers can transact in a safer student marketplace.',
     },
     {
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="2"/>
-          <path d="M2 10h20" stroke="currentColor" strokeWidth="2"/>
+          <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
+          <path d="M2 10h20" stroke="currentColor" strokeWidth="2" />
         </svg>
       ),
-      title: "Fast & Secure Payments",
-      desc: "Built-in escrow protection so buyers and sellers both feel confident in every transaction.",
+      title: 'Smooth Campus Payments',
+      desc: 'Students can buy and sell on campus with a clear checkout flow that reduces friction for every order.',
     },
     {
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
-      title: "24/7 Customer Support",
-      desc: "Got an issue? Our support team — fellow students — is always a message away, day or night.",
+      title: 'Support for Campus Users',
+      desc: 'Blorbmart helps students, sellers, and riders resolve issues quickly with clear platform guidance and support.',
     },
     {
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
-      title: "Lightning-Fast Delivery",
-      desc: "Campus riders deliver your orders between classes — sometimes in under 20 minutes.",
+      title: 'Fast On-Campus Delivery',
+      desc: 'Campus riders deliver items between classes so students can shop locally without leaving the university.',
     },
-  ];
+  ]
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap');
-
         .about-section {
           font-family: 'DM Sans', sans-serif;
           background: #f8f9ff;
@@ -106,10 +104,9 @@ export default function About() {
           color: #64748b;
           font-size: 1.05rem;
           line-height: 1.75;
-          max-width: 480px;
+          max-width: 540px;
         }
 
-        /* Stats row */
         .stats-row {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -147,7 +144,6 @@ export default function About() {
           font-weight: 500;
         }
 
-        /* Feature cards */
         .features-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -199,7 +195,6 @@ export default function About() {
           line-height: 1.55;
         }
 
-        /* Image side */
         .image-wrapper {
           position: relative;
         }
@@ -218,7 +213,6 @@ export default function About() {
           display: block;
         }
 
-        /* Floating badge */
         .float-badge {
           position: absolute;
           bottom: 28px;
@@ -237,7 +231,6 @@ export default function About() {
         .float-badge-icon {
           width: 42px;
           height: 42px;
-          /* use a solid color rather than a gradient for the badge */
           background: #2563eb;
           border-radius: 10px;
           display: flex;
@@ -262,7 +255,6 @@ export default function About() {
           font-weight: 500;
         }
 
-        /* Top-right accent chip */
         .image-chip {
           position: absolute;
           top: 24px;
@@ -285,7 +277,6 @@ export default function About() {
           color: #60a5fa;
         }
 
-        /* Decorative dot grid */
         .dot-grid {
           position: absolute;
           bottom: -20px;
@@ -307,29 +298,30 @@ export default function About() {
         }
       `}</style>
 
-      <section id="about" className="about-section py-20 px-4 sm:px-6 lg:px-8">
+      <section id="about" className="about-section py-20 px-4 sm:px-6 lg:px-8" aria-labelledby="about-heading">
         <div className="max-w-7xl mx-auto">
           <div className="grid gap-16 lg:grid-cols-2 items-center">
-
-            {/* LEFT: Text content */}
             <div>
               <div className="about-badge">
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor">
-                  <circle cx="5" cy="5" r="5"/>
+                  <circle cx="5" cy="5" r="5" />
                 </svg>
                 About Blorbmart
               </div>
 
-              <h2 className="about-heading">
-                The marketplace<br/>
+              <h2 id="about-heading" className="about-heading">
+                The student marketplace
+                <br />
                 <span>built for campus life</span>
               </h2>
 
               <p className="about-desc mt-5">
-                Blorbmart is a campus-wide marketplace built for students by students. Whether you're buying textbooks, selling your old gear, or getting food delivered between classes — we make it easy, affordable, and safe.
+                Blorbmart is a campus ecommerce platform that helps university students in Nigeria buy and sell items
+                easily on campus. From textbooks and gadgets to fashion, meals, and quick delivery, the platform gives
+                students one trusted place to trade locally, save time, and keep money circulating within their campus
+                community.
               </p>
 
-              {/* Stats */}
               <div className="stats-row">
                 {stats.map((s) => (
                   <div className="stat-item" key={s.label}>
@@ -339,52 +331,53 @@ export default function About() {
                 ))}
               </div>
 
-              {/* Feature cards */}
               <div className="features-grid">
                 {features.map((f) => (
-                  <div className="feature-card" key={f.title}>
+                  <article className="feature-card" key={f.title}>
                     <div className="feature-icon">{f.icon}</div>
                     <div>
-                      <div className="feature-title">{f.title}</div>
-                      <div className="feature-desc">{f.desc}</div>
+                      <h3 className="feature-title">{f.title}</h3>
+                      <p className="feature-desc">{f.desc}</p>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             </div>
 
-            {/* RIGHT: Image */}
             <div className="image-wrapper">
               <div className="image-frame">
-                <img src="/32450.jpg" alt="Students shopping" loading="lazy" decoding="async" />
+                <img
+                  src="/32450.jpg"
+                  alt="Students buying and selling through the Blorbmart campus marketplace"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
 
-              {/* Floating bottom-left card */}
               <div className="float-badge">
                 <div className="float-badge-icon">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 <div className="float-badge-text">
-                  <strong>Top Rated</strong>
-                  <span>Campus marketplace 2025</span>
+                  <strong>Trusted by students</strong>
+                  <span>Built for campus buyers and sellers</span>
                 </div>
               </div>
 
-              {/* Top-right chip */}
               <div className="image-chip">
                 <span>12,000+</span>
-                Students using<br/>Blorbmart
+                Students using
+                <br />
+                Blorbmart
               </div>
 
-              {/* Dot grid decoration */}
               <div className="dot-grid" />
             </div>
-
           </div>
         </div>
       </section>
     </>
-  );
+  )
 }
