@@ -30,8 +30,8 @@ const footerLinks = [
 
 const socialLinks = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/blorbmart' },
-  { label: 'X', href: 'https://x.com/blorbmart' },
-  { label: 'Instagram', href: 'https://www.instagram.com/blorbmart' },
+  { label: 'X', href: 'https://x.com/Blorbmart' },
+  { label: 'Instagram', href: 'https://www.instagram.com/blorbmart_uniosun/' },
 ]
 
 export default function Footer() {
