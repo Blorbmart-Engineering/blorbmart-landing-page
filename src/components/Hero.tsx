@@ -316,6 +316,7 @@ function PremiumCarousel() {
   )
 }
 
+
 /* ─────────────────────────────────────────────
    HERO
 ───────────────────────────────────────────── */
@@ -394,9 +395,6 @@ export default function Hero() {
           .hero-stats {
             flex-direction: column;
             gap: 24px;
-          }
-          .hero-carousel {
-            order: -1;
           }
           .slide-tag {
             top: 8px;

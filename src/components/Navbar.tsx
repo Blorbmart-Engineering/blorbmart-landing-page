@@ -10,38 +10,50 @@ export default function Navbar() {
     { label: 'Sellers', href: '#' },
     { label: 'Riders', href: '#' },
     { label: 'Team', href: '#' },
+    { label: 'Blog', href: '#insights' },
     { label: 'Download', href: '#' },
   ]
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-blue-600 text-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex min-h-[84px] items-center justify-between rounded-[26px] border border-white/80 bg-white/85 px-4 shadow-[0_18px_40px_rgba(15,23,42,0.12),inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-6px_18px_rgba(148,163,184,0.12)] backdrop-blur-xl sm:px-6">
           <div className="flex items-center gap-4">
-            <a href="#" className="flex items-center gap-3 no-underline">
-              <img src="/logo.png" alt="Blorbmart logo" className="w-10 h-10 bg-white rounded-full p-1" />
-              <div className="leading-none">
-                <div className="font-semibold text-lg">Blorbmart</div>
-                <div className="text-xs text-white/80">Campus Marketplace</div>
-              </div>
+            <a href="#" className="flex items-center no-underline">
+              <img
+                src="/fulllogo.png"
+                alt="Blorbmart"
+                className="h-14 w-auto object-contain sm:h-16"
+              />
             </a>
           </div>
 
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden items-center space-x-6 md:flex">
             {links.map((l) => (
-              <a key={l.label} href={l.href} className="text-white/90 hover:text-white transition">{l.label}</a>
+              <a
+                key={l.label}
+                href={l.href}
+                className="text-sm font-medium text-slate-700 transition hover:text-blue-600"
+              >
+                {l.label}
+              </a>
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center space-x-3">
-            <a href="#" className="px-4 py-2 bg-white text-blue-600 rounded-md font-medium hover:bg-white/90">Get Started</a>
+          <div className="hidden items-center space-x-3 md:flex">
+            <a
+              href="#"
+              className="rounded-full border border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] px-5 py-2.5 text-sm font-semibold text-slate-800 shadow-[0_10px_24px_rgba(148,163,184,0.18),inset_0_1px_0_rgba(255,255,255,0.95)] transition hover:-translate-y-0.5 hover:text-blue-600"
+            >
+              Get Started
+            </a>
           </div>
 
-          <div className="md:hidden flex items-center">
+          <div className="flex items-center md:hidden">
             <button
               onClick={() => setOpen((v) => !v)}
               aria-label="Toggle menu"
-              className="p-2 rounded-md text-white/90 hover:bg-white/10"
+              className="rounded-full border border-slate-200 bg-white/70 p-2 text-slate-700 shadow-[0_8px_18px_rgba(148,163,184,0.18)] transition hover:text-blue-600"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {open ? (
@@ -56,37 +68,49 @@ export default function Navbar() {
       </div>
 
       {open && (
-        // backdrop catches clicks to close the menu
         <div
-          className="md:hidden fixed inset-0 bg-blue-600/95 backdrop-blur-sm z-50"
+          className="fixed inset-0 z-50 bg-slate-950/20 backdrop-blur-sm md:hidden"
           onClick={() => setOpen(false)}
         >
-          <div className="pt-20 px-6" onClick={(e) => e.stopPropagation()}>
+          <div className="px-4 pt-24" onClick={(e) => e.stopPropagation()}>
             <div className="flex justify-end">
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Close menu"
-                className="p-2 rounded-md text-white/90 hover:bg-white/10"
+                className="rounded-full border border-slate-200 bg-white/85 p-2 text-slate-700 shadow-[0_8px_18px_rgba(148,163,184,0.18)]"
               >
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <div className="pt-6 flex flex-col space-y-6">
+            <div className="mt-4 rounded-[28px] border border-white/70 bg-white/88 p-6 shadow-[0_24px_60px_rgba(15,23,42,0.14),inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-8px_24px_rgba(148,163,184,0.14)] backdrop-blur-xl">
+              <div className="mb-6 border-b border-slate-100 pb-4">
+                <img
+                  src="/fulllogo.png"
+                  alt="Blorbmart"
+                  className="h-12 w-auto object-contain"
+                />
+              </div>
+              <div className="flex flex-col space-y-5">
               {links.map((l) => (
                 <a
                   key={l.label}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="text-white text-lg font-medium"
-                >{l.label}</a>
+                  className="text-base font-medium text-slate-700 transition hover:text-blue-600"
+                >
+                  {l.label}
+                </a>
               ))}
               <a
                 href="#"
                 onClick={() => setOpen(false)}
-                className="mt-2 inline-block px-6 py-3 bg-white text-blue-600 rounded-md font-semibold w-max"
-              >Get Started</a>
+                className="mt-2 inline-flex w-max rounded-full bg-[linear-gradient(135deg,#2563eb,#1d4ed8)] px-6 py-3 font-semibold text-white shadow-[0_14px_32px_rgba(37,99,235,0.32)]"
+              >
+                Get Started
+              </a>
+              </div>
             </div>
           </div>
         </div>
