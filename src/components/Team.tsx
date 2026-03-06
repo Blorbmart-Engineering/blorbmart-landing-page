@@ -7,9 +7,9 @@ const members: TeamMemberCardProps[] = [
     image: '/samuel.jpg',
     bio: 'Samuel leads Blorbmart strategy and campus growth, focusing on how students buy and sell items more easily within their university.',
     portfolio: 'https://blorbmart-landing-page.vercel.app/#team',
-    github: 'https://github.com/Blorbmart',
+    github: 'https://github.com/tomisin68',
     linkedin: 'https://www.linkedin.com/company/blorbmart',
-    twitter: 'https://x.com/blorbmart',
+    twitter: 'https://x.com/OuwabiyiSamuel',
   },
   {
     name: 'Badmus Qudus Ayomide',
