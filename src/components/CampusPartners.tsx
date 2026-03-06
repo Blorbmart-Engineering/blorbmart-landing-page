@@ -144,8 +144,7 @@ export default function CampusPartners() {
           </h2>
           <p className="partners-copy">
             Blorbmart is building a campus marketplace designed to work with trusted student communities, university
-            ecosystems, and recognizable technology partners. These logo-style placeholders can be replaced with your
-            real campus partners later, while the section still adds strong trust and SEO relevance now.
+            ecosystems, and recognizable technology partners.
           </p>
 
           <div className="partners-marquee" aria-label="Campus partner logos">
