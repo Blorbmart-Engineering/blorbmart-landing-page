@@ -356,7 +356,7 @@ export default function About() {
             {/* RIGHT: Image */}
             <div className="image-wrapper">
               <div className="image-frame">
-                <img src="/32450.jpg" alt="Students shopping" />
+                <img src="/32450.jpg" alt="Students shopping" loading="lazy" decoding="async" />
               </div>
 
               {/* Floating bottom-left card */}

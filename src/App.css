@@ -1,9 +1,59 @@
 #root {
-  --header-h: 4rem;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: calc(var(--header-h) + 1rem) 2rem 2rem;
-  text-align: center;
+  --header-h: 7.5rem;
+  width: 100%;
+  margin: 0;
+  padding: var(--header-h) 0 0;
+  overflow-x: hidden;
+  text-align: initial;
+}
+
+main > * {
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+@media (max-width: 768px) {
+  .backdrop-blur-xl,
+  .newsletter-card,
+  .team-tag,
+  .team-hero-card,
+  .team-card,
+  .insights-note,
+  .insight-card,
+  .how-highlight,
+  .persona-card,
+  .mobile-tag,
+  .mobile-feature-card,
+  .phone-shell,
+  .phone-top-card,
+  .phone-bottom-card,
+  .seller-tag,
+  .seller-stat-card,
+  .seller-feature-card,
+  .seller-story,
+  .seller-benefits,
+  .rider-tag,
+  .rider-visual,
+  .rider-feature-card,
+  .rider-story,
+  .rider-requirements {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08) !important;
+  }
+
+  .team-card,
+  .seller-feature-card,
+  .seller-cta-button,
+  .rider-button,
+  .persona-card,
+  .how-btn-primary,
+  .how-btn-secondary,
+  .btn-primary,
+  .btn-secondary,
+  .carousel-dot {
+    transition: none !important;
+    transform: none !important;
+  }
 }
 
 .logo {

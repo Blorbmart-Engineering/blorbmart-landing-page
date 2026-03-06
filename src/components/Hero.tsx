@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 type Slide = {
@@ -64,34 +64,32 @@ const DURATION = 4500
 ───────────────────────────────────────────── */
 function PremiumCarousel() {
   const [index, setIndex] = useState(0)
-  const [progress, setProgress] = useState(0)
-  const [transitioning, setTransitioning] = useState(false)
-  const runningRef = useRef(true)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    let raf = 0
-    let start = performance.now()
+    const media = window.matchMedia('(max-width: 768px)')
+    const update = () => setIsMobile(media.matches)
 
-    function tick(now: number) {
-      if (!runningRef.current) { start = now - (progress / 100) * DURATION }
-      const elapsed = now - start
-      const pct = Math.min(100, (elapsed / DURATION) * 100)
-      setProgress(pct)
-      if (elapsed >= DURATION) {
-        setTransitioning(true)
-        setTimeout(() => {
-          setIndex(i => (i + 1) % slides.length)
-          setTransitioning(false)
-        }, 350)
-        start = now
-        setProgress(0)
-      }
-      raf = requestAnimationFrame(tick)
+    update()
+
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', update)
+      return () => media.removeEventListener('change', update)
     }
 
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    media.addListener(update)
+    return () => media.removeListener(update)
+  }, [])
+
+  useEffect(() => {
+    if (isMobile) return
+
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % slides.length)
+    }, DURATION)
+
+    return () => window.clearInterval(timer)
+  }, [isMobile])
 
   const slide = slides[index]
 
@@ -112,8 +110,12 @@ function PremiumCarousel() {
         .carousel-img-enter {
           animation: scaleIn 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
         }
+        @keyframes progressRun {
+          from { width: 0%; }
+          to   { width: 100%; }
+        }
         .progress-bar {
-          transition: width 100ms linear;
+          animation: progressRun ${DURATION}ms linear forwards;
         }
         .carousel-dot {
           transition: all 0.3s ease;
@@ -121,41 +123,64 @@ function PremiumCarousel() {
         .slide-tag {
           animation: fadeSlide 0.3s 0.1s ease both;
         }
+        .carousel-card {
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.10);
+          border-radius: 24px;
+          overflow: hidden;
+          backdrop-filter: blur(12px);
+          box-shadow: 0 32px 64px rgba(0,0,0,0.35);
+        }
+        .trust-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          background: rgba(255,255,255,0.06);
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 999px;
+          padding: 5px 12px;
+          font-size: 11px;
+          color: rgba(255,255,255,0.55);
+          font-weight: 500;
+        }
+        @media (max-width: 768px) {
+          .carousel-card {
+            backdrop-filter: none;
+            box-shadow: 0 16px 32px rgba(0,0,0,0.22);
+          }
+          .slide-tag,
+          .trust-chip {
+            backdrop-filter: none !important;
+          }
+          .carousel-dot {
+            transition: none;
+          }
+        }
       `}</style>
 
       <div
         className="w-full"
-        onMouseEnter={() => { runningRef.current = false }}
-        onMouseLeave={() => { runningRef.current = true }}
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         {/* Card */}
-        <div style={{
-          background: 'rgba(255,255,255,0.04)',
-          border: '1px solid rgba(255,255,255,0.10)',
-          borderRadius: '24px',
-          overflow: 'hidden',
-          backdropFilter: 'blur(12px)',
-          boxShadow: '0 32px 64px rgba(0,0,0,0.35)',
-        }}>
+        <div className="carousel-card">
 
           {/* Image area */}
           <div style={{ position: 'relative', height: '280px', overflow: 'hidden' }}>
-            {slides.map((s, i) => (
-              <img
-                key={i}
-                src={s.image}
-                alt={s.imageAlt}
-                className={i === index ? 'carousel-img-enter' : ''}
-                style={{
-                  position: 'absolute', inset: 0,
-                  width: '100%', height: '100%',
-                  objectFit: 'cover',
-                  opacity: i === index ? 1 : 0,
-                  transition: 'opacity 0.45s ease',
-                }}
-              />
-            ))}
+            <img
+              key={index}
+              src={slide.image}
+              alt={slide.imageAlt}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              fetchPriority={index === 0 ? 'high' : 'auto'}
+              decoding="async"
+              className="carousel-img-enter"
+              style={{
+                position: 'absolute', inset: 0,
+                width: '100%', height: '100%',
+                objectFit: 'cover',
+              }}
+            />
             {/* gradient overlay */}
             <div style={{
               position: 'absolute', inset: 0,
@@ -194,10 +219,7 @@ function PremiumCarousel() {
 
           {/* Text content */}
           <div style={{ padding: '20px 24px 24px' }}>
-            <div
-              key={`text-${index}`}
-              className={transitioning ? '' : 'carousel-text-enter'}
-            >
+            <div key={`text-${index}`} className="carousel-text-enter">
               <div style={{
                 fontSize: '1.25rem',
                 fontWeight: 800,
@@ -230,15 +252,17 @@ function PremiumCarousel() {
                 background: 'rgba(255,255,255,0.1)',
                 borderRadius: 999, overflow: 'hidden',
               }}>
-                <div
-                  className="progress-bar"
-                  style={{
-                    height: '100%',
-                    width: `${progress}%`,
-                    background: `linear-gradient(to right, ${slide.accent}, white)`,
-                    borderRadius: 999,
-                  }}
-                />
+                {!isMobile && (
+                  <div
+                    key={`progress-${index}`}
+                    className="progress-bar"
+                    style={{
+                      height: '100%',
+                      background: `linear-gradient(to right, ${slide.accent}, white)`,
+                      borderRadius: 999,
+                    }}
+                  />
+                )}
               </div>
 
               {/* Dots */}
@@ -246,7 +270,7 @@ function PremiumCarousel() {
                 {slides.map((_, i) => (
                   <button
                     key={i}
-                    onClick={() => { setIndex(i); setProgress(0) }}
+                    onClick={() => setIndex(i)}
                     aria-label={`Go to slide ${i + 1}`}
                     className="carousel-dot"
                     style={{
@@ -296,16 +320,7 @@ function PremiumCarousel() {
               text: 'On-campus only',
             },
           ].map((item) => (
-            <div key={item.text} style={{
-              display: 'inline-flex', alignItems: 'center', gap: 4,
-              background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: 999,
-              padding: '5px 12px',
-              fontSize: '11px',
-              color: 'rgba(255,255,255,0.55)',
-              fontWeight: 500,
-            }}>
+            <div key={item.text} className="trust-chip">
               {item.icon}
               <span>{item.text}</span>
             </div>
@@ -330,29 +345,16 @@ export default function Hero() {
           background: #070c1a;
           position: relative;
           overflow: hidden;
-          /* cancel only the extra 1rem of spacing from #root padding
-             so the section sits directly below the fixed header */
-          margin-top: -1rem;
-          /* reserve space for the fixed header so the hero's
-             content isn't pushed below the fold */
-          min-height: calc(100vh - 4rem);
+          min-height: calc(100vh - var(--header-h));
           display: flex;
           align-items: center;
-
-          /* force the section to span the full viewport width
-             and escape the #root container's side padding/ max-width */
-          width: 100vw;
-          left: 50%;
-          right: 50%;
-          margin-left: -50vw;
-          margin-right: -50vw;
+          width: 100%;
         }
 
         .hero-content {
           max-width: 1280px;
           margin: 0 auto;
-          /* a bit more top gutter keeps text from colliding with header */
-          padding: 3rem 24px 24px;
+          padding: 2.5rem 24px 24px;
           width: 100%;
           position: relative;
           z-index: 1;
@@ -379,7 +381,7 @@ export default function Hero() {
 
         @media (max-width: 768px) {
           .hero-content {
-            padding: 2rem 16px 24px;
+            padding: 1.5rem 16px 24px;
             gap: 32px;
           }
           .hero-h1 {

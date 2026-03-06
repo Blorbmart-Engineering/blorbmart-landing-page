@@ -346,7 +346,7 @@ export default function RiderSection() {
             </div>
 
             <div className="rider-visual">
-              <img src="/49737.jpg" alt="Campus rider delivering on campus" />
+              <img src="/49737.jpg" alt="Campus rider delivering on campus" loading="lazy" decoding="async" />
               <div className="rider-visual-note">
                 <div>
                   <strong>Fast campus deliveries</strong>
