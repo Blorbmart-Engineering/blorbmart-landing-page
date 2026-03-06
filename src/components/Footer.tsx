@@ -67,7 +67,7 @@ export default function Footer() {
         }
 
         .footer-logo img {
-          height: 42px;
+          height: 58px;
           width: auto;
           object-fit: contain;
           filter: brightness(1.04);

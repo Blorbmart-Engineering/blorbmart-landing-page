@@ -4,26 +4,27 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
 
   const links = [
-    { label: 'Home', href: '#' },
-    { label: 'About', href: '#' },
-    { label: 'How It Works', href: '#' },
-    { label: 'Sellers', href: '#' },
-    { label: 'Riders', href: '#' },
-    { label: 'Team', href: '#' },
+    { label: 'Home', href: '#home' },
+    { label: 'About', href: '#about' },
+    { label: 'How It Works', href: '#how-it-works' },
+    { label: 'Sellers', href: '#seller-section' },
+    { label: 'Riders', href: '#rider-section' },
+    { label: 'Team', href: '#team-section' },
     { label: 'Blog', href: '#insights' },
-    { label: 'Download', href: '#' },
+    { label: 'Download', href: '#mobile-app' },
   ]
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="flex min-h-[84px] items-center justify-between rounded-[26px] border border-white/80 bg-white/85 px-4 shadow-[0_18px_40px_rgba(15,23,42,0.12),inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-6px_18px_rgba(148,163,184,0.12)] backdrop-blur-xl sm:px-6">
+        <div className="rounded-[26px] border border-white/80 bg-white/85 shadow-[0_18px_40px_rgba(15,23,42,0.12),inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-6px_18px_rgba(148,163,184,0.12)] backdrop-blur-xl">
+          <div className="flex min-h-[96px] items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-4">
             <a href="#" className="flex items-center no-underline">
               <img
                 src="/fulllogo.png"
                 alt="Blorbmart"
-                className="h-14 w-auto object-contain sm:h-16"
+                className="h-16 w-auto object-contain sm:h-20"
               />
             </a>
           </div>
@@ -65,31 +66,17 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-      </div>
-
-      {open && (
-        <div
-          className="fixed inset-0 z-50 bg-slate-950/20 backdrop-blur-sm md:hidden"
-          onClick={() => setOpen(false)}
-        >
-          <div className="px-4 pt-24" onClick={(e) => e.stopPropagation()}>
-            <div className="flex justify-end">
-              <button
-                onClick={() => setOpen(false)}
-                aria-label="Close menu"
-                className="rounded-full border border-slate-200 bg-white/85 p-2 text-slate-700 shadow-[0_8px_18px_rgba(148,163,184,0.18)]"
-              >
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            <div className="mt-4 rounded-[28px] border border-white/70 bg-white/88 p-6 shadow-[0_24px_60px_rgba(15,23,42,0.14),inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-8px_24px_rgba(148,163,184,0.14)] backdrop-blur-xl">
-              <div className="mb-6 border-b border-slate-100 pb-4">
+          <div
+            className={`overflow-hidden transition-[max-height,opacity,padding] duration-300 ease-out md:hidden ${
+              open ? 'max-h-[520px] opacity-100 px-4 pb-4 sm:px-6 sm:pb-6' : 'max-h-0 opacity-0 px-4 pb-0 sm:px-6'
+            }`}
+          >
+            <div className="border-t border-slate-100/80 pt-4">
+              <div className="mb-5 border-b border-slate-100 pb-4">
                 <img
                   src="/fulllogo.png"
                   alt="Blorbmart"
-                  className="h-12 w-auto object-contain"
+                  className="h-14 w-auto object-contain"
                 />
               </div>
               <div className="flex flex-col space-y-5">
@@ -114,7 +101,7 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-      )}
+      </div>
     </header>
   )
 }

@@ -497,7 +497,7 @@ export default function Hero() {
         .avatar-stack :first-child { margin-left: 0; }
       `}</style>
 
-      <section className="hero-section">
+      <section className="hero-section" id="home">
         <div className="hero-content">
 
           {/* ── LEFT COLUMN ── */}
