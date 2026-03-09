@@ -13,7 +13,7 @@ import SEO from './components/SEO'
 import SellerSection from './components/SellerSection'
 import Team, { teamStructuredData } from './components/Team'
 
-const siteUrl = 'https://blorbmart-landing-page.vercel.app'
+const siteUrl = 'https://blorbmart.com.ng'
 
 const structuredData = [
   {

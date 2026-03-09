@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://blorbmart-landing-page.vercel.app/sitemap.xml
+Sitemap: https://blorbmart.com.ng/sitemap.xml
