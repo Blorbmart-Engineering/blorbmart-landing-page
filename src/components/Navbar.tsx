@@ -24,7 +24,7 @@ export default function Navbar() {
                 <img
                   src="/fulllogo.png"
                   alt="Blorbmart campus marketplace logo"
-                  className="h-12 w-auto object-contain sm:h-16"
+                  className="h-16 w-auto object-contain sm:h-20"
                   fetchPriority="high"
                 />
               </a>
@@ -78,7 +78,7 @@ export default function Navbar() {
                 <img
                   src="/fulllogo.png"
                   alt="Blorbmart campus marketplace logo"
-                  className="h-12 w-auto object-contain"
+                  className="h-16 w-auto object-contain"
                   loading="lazy"
                 />
               </div>
