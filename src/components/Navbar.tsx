@@ -15,16 +15,16 @@ export default function Navbar() {
   ]
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-2 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="rounded-[26px] border border-white/80 bg-white/85 shadow-[0_18px_40px_rgba(15,23,42,0.12),inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-6px_18px_rgba(148,163,184,0.12)] backdrop-blur-xl">
-          <div className="flex min-h-[96px] items-center justify-between px-4 sm:px-6">
+          <div className="flex min-h-[72px] items-center justify-between px-4 sm:px-6">
             <div className="flex items-center gap-4">
               <a href="/#home" className="flex items-center no-underline" aria-label="Blorbmart home">
                 <img
                   src="/fulllogo.png"
                   alt="Blorbmart campus marketplace logo"
-                  className="h-16 w-auto object-contain sm:h-20"
+                  className="h-12 w-auto object-contain sm:h-16"
                   fetchPriority="high"
                 />
               </a>
@@ -45,7 +45,7 @@ export default function Navbar() {
             <div className="hidden items-center space-x-3 md:flex">
               <a
                 href="/#download"
-                className="rounded-full border border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] px-5 py-2.5 text-sm font-semibold text-slate-800 shadow-[0_10px_24px_rgba(148,163,184,0.18),inset_0_1px_0_rgba(255,255,255,0.95)] transition hover:-translate-y-0.5 hover:text-blue-600"
+                className="rounded-full border border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] px-4 py-2 text-sm font-semibold text-slate-800 shadow-[0_10px_24px_rgba(148,163,184,0.18),inset_0_1px_0_rgba(255,255,255,0.95)] transition hover:-translate-y-0.5 hover:text-blue-600"
               >
                 Download App
               </a>
@@ -78,7 +78,7 @@ export default function Navbar() {
                 <img
                   src="/fulllogo.png"
                   alt="Blorbmart campus marketplace logo"
-                  className="h-14 w-auto object-contain"
+                  className="h-12 w-auto object-contain"
                   loading="lazy"
                 />
               </div>
