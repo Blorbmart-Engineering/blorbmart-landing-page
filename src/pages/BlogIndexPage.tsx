@@ -8,6 +8,7 @@ import { siteConfig } from '../siteConfig'
 
 export default function BlogIndexPage() {
   const { data: posts, isLoading } = useAllPosts()
+  const [featuredPost, ...remainingPosts] = posts
 
   const structuredData = [
     {
@@ -53,19 +54,37 @@ export default function BlogIndexPage() {
           <BlogHero
             eyebrow="Blorbmart Blog"
             title="Campus business ideas, selling tips, and student marketplace insights"
-            description="This page lists every blog post. Each article gets its own SEO-friendly URL, and the newest posts can also show on the landing page."
+            description="Actionable content for students, sellers, and campus founders. The newest post is featured here, and the rest are easy to scan below."
+            totalPosts={posts.length}
+            featuredPost={featuredPost}
           />
           <SeoNotice />
-          <section className="px-4 py-10 sm:px-6 lg:px-8">
-            <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 xl:grid-cols-3">
+          <section id="posts" className="px-4 py-8 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl">
+              <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <div className="text-sm font-bold uppercase tracking-[0.16em] text-blue-700">Latest articles</div>
+                  <h2 className="mt-2 font-['Sora'] text-3xl font-semibold tracking-[-0.04em] text-slate-950">
+                    Read what students actually need
+                  </h2>
+                </div>
+                <p className="max-w-xl text-base leading-7 text-slate-600">
+                  The grid below should feel like a proper content library, not an afterthought under the hero.
+                </p>
+              </div>
+
+              <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
               {isLoading
-                ? Array.from({ length: 3 }).map((_, index) => (
+                ? Array.from({ length: 6 }).map((_, index) => (
                     <div
                       key={index}
                       className="h-[420px] animate-pulse rounded-[30px] bg-white shadow-[0_22px_50px_rgba(148,163,184,0.18)]"
                     />
                   ))
-                : posts.map((post) => <BlogCard key={post.id} post={post} />)}
+                : (remainingPosts.length ? remainingPosts : featuredPost ? [featuredPost] : []).map((post) => (
+                    <BlogCard key={post.id} post={post} />
+                  ))}
+              </div>
             </div>
           </section>
         </main>

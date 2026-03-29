@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://blorbmart.com.ng/sitemap.xml
+Sitemap: https://www.blorbmart.com.ng/sitemap.xml
