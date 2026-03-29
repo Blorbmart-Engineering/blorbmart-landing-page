@@ -1,4 +1,4 @@
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 import { createClient } from '@sanity/client'
 
 const projectId = import.meta.env.VITE_SANITY_PROJECT_ID
@@ -16,7 +16,7 @@ export const sanityClient = isSanityConfigured
     })
   : null
 
-const imageBuilder = isSanityConfigured && sanityClient ? imageUrlBuilder(sanityClient) : null
+const imageBuilder = isSanityConfigured && sanityClient ? createImageUrlBuilder(sanityClient) : null
 
 export function urlForImage(source: unknown) {
   if (!imageBuilder || !source) {
