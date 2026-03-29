@@ -35,7 +35,6 @@ export const postType = defineType({
       options: {
         hotspot: true,
       },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'publishedAt',
