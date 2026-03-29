@@ -14,16 +14,16 @@ const footerLinks = [
       { label: 'Sellers', href: '/#sellers' },
       { label: 'Riders', href: '/#riders' },
       { label: 'Team', href: '/#team' },
-      { label: 'Blog', href: '/#blog' },
+      { label: 'Blog', href: '/blog' },
     ],
   },
   {
     title: 'Resources',
     links: [
       { label: 'FAQ', href: '/#faq' },
-      { label: 'Student Marketplace Guide', href: '/#how-it-works' },
-      { label: 'Sell on Campus', href: '/#sellers' },
-      { label: 'Campus Rider Opportunities', href: '/#riders' },
+      { label: 'Student Marketplace Guide', href: '/blog' },
+      { label: 'Sell on Campus', href: '/blog' },
+      { label: 'Campus Rider Opportunities', href: '/blog' },
     ],
   },
 ]
@@ -188,7 +188,7 @@ export default function Footer() {
             ))}
           </div>
 
-          <div className="footer-bottom">© 2026 Blorbmart. All rights reserved.</div>
+          <div className="footer-bottom">Copyright 2026 Blorbmart. All rights reserved.</div>
         </div>
       </footer>
     </>

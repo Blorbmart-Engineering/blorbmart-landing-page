@@ -10,7 +10,7 @@ export default function Navbar() {
     { label: 'Sellers', href: '/#sellers' },
     { label: 'Riders', href: '/#riders' },
     { label: 'Team', href: '/#team' },
-    { label: 'Blog', href: '/#blog' },
+    { label: 'Blog', href: '/blog' },
     { label: 'Download', href: '/#download' },
   ]
 

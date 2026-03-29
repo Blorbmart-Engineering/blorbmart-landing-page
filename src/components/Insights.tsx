@@ -1,25 +1,11 @@
-const articles = [
-  {
-    source: 'Blorbmart Blog',
-    title: 'How Students Can Make Money on Campus',
-    description: 'Practical ideas for turning campus demand into a student business with Blorbmart.',
-    href: '/#download',
-  },
-  {
-    source: 'Blorbmart Blog',
-    title: 'Best Items to Sell in University',
-    description: 'A guide to the high-demand products and services students buy most often on campus.',
-    href: '/#sellers',
-  },
-  {
-    source: 'Blorbmart Blog',
-    title: 'Guide to Campus Buying and Selling',
-    description: 'Learn how to buy and sell on campus safely, quickly, and profitably through a student marketplace.',
-    href: '/#how-it-works',
-  },
-]
+import { Link } from 'react-router-dom'
+import type { BlogPost } from '../types/blog'
 
-export default function Insights() {
+type InsightsProps = {
+  articles: BlogPost[]
+}
+
+export default function Insights({ articles }: InsightsProps) {
   return (
     <>
       <style>{`
@@ -147,25 +133,30 @@ export default function Insights() {
                 <span style={{ width: 8, height: 8, borderRadius: '999px', background: '#2563eb', boxShadow: '0 0 0 6px rgba(37,99,235,0.12)' }} />
                 Blog
               </div>
-              <h2 id="blog-heading" className="insights-title">Campus marketplace insights for students and sellers</h2>
+              <h2 id="blog-heading" className="insights-title">Recent blog posts from the Blorbmart knowledge hub</h2>
               <p className="insights-copy">
-                These SEO-focused blog previews explain how students can make money on campus, what to sell in
-                university, and how to use a student marketplace more effectively.
+                These article previews now link to real blog pages, so you can publish from Sanity, show the newest
+                posts here on the landing page, and let search engines index each post properly.
               </p>
             </div>
             <div className="insights-note">
-              Recommended future additions: testimonials, user reviews, and campus partner stories for stronger trust
-              signals and richer search snippets.
+              Use this section for your latest or featured posts, then send users to the full{' '}
+              <Link to="/blog" className="font-semibold text-blue-700">
+                blog page
+              </Link>{' '}
+              to see everything.
             </div>
           </div>
 
           <div className="insights-grid">
             {articles.map((article) => (
-              <article key={article.title} className="insight-card">
-                <span className="insight-source">{article.source}</span>
+              <article key={article.slug} className="insight-card">
+                <span className="insight-source">{article.category || 'Blorbmart Blog'}</span>
                 <h3>{article.title}</h3>
-                <p>{article.description}</p>
-                <a href={article.href} className="insight-link">Read article</a>
+                <p>{article.excerpt}</p>
+                <Link to={`/blog/${article.slug}`} className="insight-link">
+                  Read article
+                </Link>
               </article>
             ))}
           </div>

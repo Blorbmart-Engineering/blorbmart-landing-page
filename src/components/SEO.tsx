@@ -7,6 +7,7 @@ type SEOProps = {
   canonical: string
   image: string
   structuredData?: Array<Record<string, unknown>>
+  type?: 'website' | 'article'
 }
 
 export default function SEO({
@@ -16,6 +17,7 @@ export default function SEO({
   canonical,
   image,
   structuredData = [],
+  type = 'website',
 }: SEOProps) {
   return (
     <Helmet prioritizeSeoTags>
@@ -27,7 +29,7 @@ export default function SEO({
       <meta name="author" content="Blorbmart" />
       <link rel="canonical" href={canonical} />
 
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={type} />
       <meta property="og:site_name" content="Blorbmart" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
