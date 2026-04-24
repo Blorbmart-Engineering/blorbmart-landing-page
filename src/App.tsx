@@ -5,6 +5,7 @@ const HomePage = lazy(() => import('./pages/HomePage'))
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'))
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
 const StudioPage = lazy(() => import('./pages/StudioPage'))
+const TermsAndConditionsPage = lazy(() => import('./pages/TermsAndConditionsPage'))
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/blog" element={<BlogIndexPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/studio/*" element={<StudioPage />} />
+        <Route path="/terms" element={<TermsAndConditionsPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>

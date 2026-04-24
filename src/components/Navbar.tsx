@@ -11,6 +11,7 @@ export default function Navbar() {
     { label: 'Riders', href: '/#riders' },
     { label: 'Team', href: '/#team' },
     { label: 'Blog', href: '/blog' },
+    { label: 'Terms & Conditions', href: '/terms' },
     { label: 'Download', href: '/#download' },
   ]
 

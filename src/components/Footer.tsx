@@ -21,6 +21,7 @@ const footerLinks = [
     title: 'Resources',
     links: [
       { label: 'FAQ', href: '/#faq' },
+      { label: 'Terms & Conditions', href: '/terms' },
       { label: 'Student Marketplace Guide', href: '/blog' },
       { label: 'Sell on Campus', href: '/blog' },
       { label: 'Campus Rider Opportunities', href: '/blog' },
