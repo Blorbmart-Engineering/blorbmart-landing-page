@@ -19,13 +19,13 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-2 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="rounded-[26px] border border-white/80 bg-white/85 shadow-[0_18px_40px_rgba(15,23,42,0.12),inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-6px_18px_rgba(148,163,184,0.12)] backdrop-blur-xl">
-          <div className="flex min-h-[72px] items-center justify-between px-4 sm:px-6">
+          <div className="flex min-h-[56px] items-center justify-between px-4 sm:px-6">
             <div className="flex items-center gap-4">
               <a href="/#home" className="flex items-center no-underline" aria-label="Blorbmart home">
                 <img
                   src="/fulllogo.png"
                   alt="Blorbmart campus marketplace logo"
-                  className="h-16 w-auto object-contain sm:h-20"
+                  className="h-12 w-auto object-contain sm:h-14"
                   fetchPriority="high"
                 />
               </a>
@@ -75,14 +75,6 @@ export default function Navbar() {
             }`}
           >
             <div className="border-t border-slate-100/80 pt-4">
-              <div className="mb-5 border-b border-slate-100 pb-4">
-                <img
-                  src="/fulllogo.png"
-                  alt="Blorbmart campus marketplace logo"
-                  className="h-16 w-auto object-contain"
-                  loading="lazy"
-                />
-              </div>
               <nav className="flex flex-col space-y-5" aria-label="Mobile navigation">
                 {links.map((l) => (
                   <a
