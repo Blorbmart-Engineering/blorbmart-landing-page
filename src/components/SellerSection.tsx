@@ -1,15 +1,27 @@
 import { motion } from 'framer-motion'
-import { ShieldTick, TickCircle, Flash, People } from 'iconsax-react'
+import {
+  Bag2, MagicStar, Star1, Book1, Flash,
+  Tag2, Heart, Home2,
+  ShieldTick, TickCircle, People,
+} from 'iconsax-react'
+import type { ComponentType } from 'react'
 
-const vendorCategories = [
-  { icon: '👗', label: 'Fashion',     color: '#ec4899', bg: 'rgba(236,72,153,0.1)' },
-  { icon: '✨', label: 'Beauty',      color: '#f43f5e', bg: 'rgba(244,63,94,0.1)'  },
-  { icon: '💧', label: 'Perfumes',    color: '#a855f7', bg: 'rgba(168,85,247,0.1)' },
-  { icon: '📚', label: 'Stationery',  color: '#1f77f1', bg: 'rgba(31,119,241,0.1)' },
-  { icon: '⚡', label: 'Electronics', color: '#6366f1', bg: 'rgba(99,102,241,0.1)' },
-  { icon: '💎', label: 'Accessories', color: '#f59e0b', bg: 'rgba(245,158,11,0.1)' },
-  { icon: '💊', label: 'Health',      color: '#10b981', bg: 'rgba(16,185,129,0.1)' },
-  { icon: '🪑', label: 'Furniture',   color: '#8b5cf6', bg: 'rgba(139,92,246,0.1)' },
+type CategoryItem = {
+  Icon: ComponentType<{ size?: number; color?: string; variant?: string }>
+  label: string
+  color: string
+  bg: string
+}
+
+const vendorCategories: CategoryItem[] = [
+  { Icon: Bag2,      label: 'Fashion',     color: '#ec4899', bg: 'rgba(236,72,153,0.1)' },
+  { Icon: MagicStar, label: 'Beauty',      color: '#f43f5e', bg: 'rgba(244,63,94,0.1)'  },
+  { Icon: Star1,     label: 'Perfumes',    color: '#a855f7', bg: 'rgba(168,85,247,0.1)' },
+  { Icon: Book1,     label: 'Stationery',  color: '#1f77f1', bg: 'rgba(31,119,241,0.1)' },
+  { Icon: Flash,     label: 'Electronics', color: '#6366f1', bg: 'rgba(99,102,241,0.1)' },
+  { Icon: Tag2,      label: 'Accessories', color: '#f59e0b', bg: 'rgba(245,158,11,0.1)' },
+  { Icon: Heart,     label: 'Health',      color: '#10b981', bg: 'rgba(16,185,129,0.1)' },
+  { Icon: Home2,     label: 'Furniture',   color: '#8b5cf6', bg: 'rgba(139,92,246,0.1)' },
 ]
 
 const sellerFeatures = [
@@ -51,8 +63,7 @@ export default function SellerSection() {
         }
         .seller-section::before {
           content: '';
-          position: absolute;
-          inset: 0;
+          position: absolute; inset: 0;
           background:
             radial-gradient(ellipse 55% 50% at 12% 18%, rgba(31,119,241,0.07), transparent 50%),
             radial-gradient(ellipse 40% 45% at 88% 10%, rgba(124,58,237,0.05), transparent 45%);
@@ -67,59 +78,39 @@ export default function SellerSection() {
         .seller-top {
           display: grid;
           grid-template-columns: minmax(0, 1fr) minmax(300px, 400px);
-          gap: 24px;
-          align-items: start;
-          margin-bottom: 36px;
+          gap: 24px; align-items: start; margin-bottom: 36px;
         }
         .seller-tag {
-          display: inline-flex;
-          align-items: center;
-          gap: 9px;
-          padding: 8px 18px;
-          border-radius: 999px;
+          display: inline-flex; align-items: center; gap: 9px;
+          padding: 8px 18px; border-radius: 999px;
           background: rgba(31,119,241,0.08);
           border: 1px solid rgba(31,119,241,0.18);
-          color: #1f77f1;
-          font-size: 12px;
-          font-weight: 800;
-          letter-spacing: 0.09em;
-          text-transform: uppercase;
-          width: fit-content;
-          margin-bottom: 20px;
+          color: #1f77f1; font-size: 12px; font-weight: 800;
+          letter-spacing: 0.09em; text-transform: uppercase;
+          width: fit-content; margin-bottom: 20px;
           font-family: 'Raleway', sans-serif;
         }
         .seller-title {
           margin: 0;
           font-family: 'Raleway', 'Sora', sans-serif;
           font-size: clamp(2.2rem, 4.2vw, 3.4rem);
-          line-height: 1.06;
-          letter-spacing: -0.03em;
-          color: #0a0f1e;
-          font-weight: 900;
+          line-height: 1.06; letter-spacing: -0.03em;
+          color: #0a0f1e; font-weight: 900;
         }
         .seller-copy {
-          margin: 18px 0 0;
-          color: #64748b;
-          font-size: 1.03rem;
-          line-height: 1.78;
-          font-weight: 500;
-          font-family: 'Raleway', sans-serif;
+          margin: 18px 0 0; color: #64748b;
+          font-size: 1.03rem; line-height: 1.78;
+          font-weight: 500; font-family: 'Raleway', sans-serif;
         }
         .seller-cat-grid {
           display: grid;
           grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 10px;
-          margin-top: 28px;
+          gap: 10px; margin-top: 28px;
         }
         .seller-cat-chip {
-          display: flex;
-          align-items: center;
-          gap: 9px;
-          padding: 11px 14px;
-          border-radius: 16px;
-          font-size: 13px;
-          font-weight: 700;
-          color: #0a0f1e;
+          display: flex; align-items: center; gap: 9px;
+          padding: 11px 14px; border-radius: 16px;
+          font-size: 13px; font-weight: 700; color: #0a0f1e;
           background: rgba(255,255,255,0.82);
           border: 1px solid rgba(255,255,255,0.95);
           box-shadow: 0 6px 18px rgba(31,119,241,0.06), inset 0 1px 0 white;
@@ -130,10 +121,8 @@ export default function SellerSection() {
           transform: translateY(-2px);
           box-shadow: 0 12px 28px rgba(31,119,241,0.1), inset 0 1px 0 white;
         }
-        .seller-cat-emoji {
-          font-size: 18px;
-          width: 32px; height: 32px;
-          border-radius: 10px;
+        .seller-cat-icon-wrap {
+          width: 32px; height: 32px; border-radius: 10px;
           display: flex; align-items: center; justify-content: center;
           flex-shrink: 0;
         }
@@ -142,21 +131,18 @@ export default function SellerSection() {
         .seller-feature-card,
         .seller-story,
         .seller-benefits {
-          border-radius: 26px;
-          padding: 30px;
+          border-radius: 26px; padding: 30px;
           background: rgba(255,255,255,0.8);
           border: 1px solid rgba(255,255,255,0.95);
           box-shadow: 0 16px 48px rgba(31,119,241,0.07), inset 0 1px 0 white;
         }
         .seller-stat-card span {
-          display: block;
-          font-size: 0.72rem; text-transform: uppercase;
+          display: block; font-size: 0.72rem; text-transform: uppercase;
           letter-spacing: 0.13em; color: #94a3b8; font-weight: 800;
           margin-bottom: 10px; font-family: 'Raleway', sans-serif;
         }
         .seller-stat-card strong {
-          display: block;
-          font-family: 'Raleway', sans-serif;
+          display: block; font-family: 'Raleway', sans-serif;
           font-size: 3.2rem; line-height: 1; color: #1f77f1; font-weight: 900;
         }
         .seller-stat-card p { margin: 10px 0 0; color: #64748b; line-height: 1.68; font-weight: 500; font-size: 0.93rem; }
@@ -169,51 +155,39 @@ export default function SellerSection() {
         .seller-comm-link:hover { text-decoration: underline; }
 
         .seller-care-note {
-          display: flex;
-          align-items: flex-start;
-          gap: 14px;
-          padding: 18px 20px;
-          border-radius: 18px;
+          display: flex; align-items: flex-start; gap: 14px;
+          padding: 18px 20px; border-radius: 18px;
           background: rgba(31,119,241,0.06);
           border: 1px solid rgba(31,119,241,0.15);
           margin-top: 20px;
         }
         .seller-care-note p {
-          margin: 0;
-          font-size: 0.88rem;
-          color: #475569;
-          line-height: 1.65;
-          font-weight: 500;
+          margin: 0; font-size: 0.88rem; color: #475569;
+          line-height: 1.65; font-weight: 500;
           font-family: 'Raleway', sans-serif;
         }
         .seller-care-note strong { color: #1f77f1; font-weight: 800; }
 
         .seller-feature-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 20px;
-          margin-bottom: 28px;
+          display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 20px; margin-bottom: 28px;
         }
         .seller-feature-icon {
-          width: 52px; height: 52px;
-          border-radius: 18px;
+          width: 52px; height: 52px; border-radius: 18px;
           display: inline-flex; align-items: center; justify-content: center;
           color: white; margin-bottom: 18px;
         }
         .seller-feature-card h3,
         .seller-story h3,
         .seller-benefits h3 {
-          margin: 0 0 10px;
-          font-family: 'Raleway', sans-serif;
-          font-size: 1.1rem;
-          color: #0a0f1e;
-          font-weight: 800;
-          letter-spacing: -0.01em;
+          margin: 0 0 10px; font-family: 'Raleway', sans-serif;
+          font-size: 1.1rem; color: #0a0f1e;
+          font-weight: 800; letter-spacing: -0.01em;
         }
         .seller-feature-card p,
         .seller-story p {
-          margin: 0; color: #64748b; line-height: 1.72; font-weight: 500; font-size: 0.93rem;
-          font-family: 'Raleway', sans-serif;
+          margin: 0; color: #64748b; line-height: 1.72;
+          font-weight: 500; font-size: 0.93rem; font-family: 'Raleway', sans-serif;
         }
         .seller-bottom {
           display: grid;
@@ -221,10 +195,8 @@ export default function SellerSection() {
           gap: 22px;
         }
         .seller-benefit-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 10px;
-          margin-bottom: 24px;
+          display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px; margin-bottom: 24px;
         }
         .seller-benefit-item {
           display: flex; align-items: center; gap: 10px;
@@ -239,8 +211,7 @@ export default function SellerSection() {
           gap: 16px; flex-wrap: wrap; padding-top: 6px;
         }
         .seller-cta-copy strong {
-          display: block;
-          font-family: 'Raleway', sans-serif;
+          display: block; font-family: 'Raleway', sans-serif;
           color: #0a0f1e; font-size: 1.05rem;
           margin-bottom: 4px; font-weight: 800;
         }
@@ -250,8 +221,7 @@ export default function SellerSection() {
         }
         .seller-cta-button {
           display: inline-flex; align-items: center; justify-content: center;
-          gap: 8px; padding: 13px 26px;
-          border-radius: 999px;
+          gap: 8px; padding: 13px 26px; border-radius: 999px;
           background: linear-gradient(135deg, #1f77f1, #1560cc);
           color: white; font-weight: 800; text-decoration: none;
           box-shadow: 0 10px 28px rgba(31,119,241,0.32);
@@ -294,19 +264,20 @@ export default function SellerSection() {
               <p className="seller-copy">
                 Blorbmart is the campus marketplace where UNIOSUN students already come to shop.
                 Whether you sell beauty products, perfumes, stationery, fashion, or gadgets — your next customer is already on the platform.
-                No need to spam WhatsApp groups or Instagram stories. Just list and sell.
               </p>
 
               <div className="seller-cat-grid">
-                {vendorCategories.map((cat) => (
+                {vendorCategories.map(({ Icon, label, color, bg }) => (
                   <motion.div
-                    key={cat.label}
+                    key={label}
                     className="seller-cat-chip"
                     whileHover={{ scale: 1.04 }}
                     transition={{ duration: 0.15 }}
                   >
-                    <div className="seller-cat-emoji" style={{ background: cat.bg }}>{cat.icon}</div>
-                    <span style={{ color: '#334155' }}>{cat.label}</span>
+                    <div className="seller-cat-icon-wrap" style={{ background: bg }}>
+                      <Icon size={18} color={color} variant="Bold" />
+                    </div>
+                    <span style={{ color: '#334155' }}>{label}</span>
                   </motion.div>
                 ))}
               </div>
@@ -330,7 +301,7 @@ export default function SellerSection() {
                 <div className="seller-care-note">
                   <ShieldTick size={22} color="#1f77f1" variant="Bold" style={{ flexShrink: 0, marginTop: 2 }} />
                   <p>
-                    <strong>No direct buyer contact needed.</strong> All communication between buyers and sellers is managed by Blorbmart's support team — keeping transactions safe and simple for everyone.
+                    <strong>No direct buyer contact needed.</strong> All communication between buyers and sellers is managed by Blorbmart's support team — keeping transactions safe for everyone.
                   </p>
                 </div>
               </div>

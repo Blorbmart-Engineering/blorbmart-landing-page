@@ -1,24 +1,30 @@
 import { Suspense, lazy } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-const HomePage = lazy(() => import('./pages/HomePage'))
-const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'))
-const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
-const StudioPage = lazy(() => import('./pages/StudioPage'))
+const HomePage        = lazy(() => import('./pages/HomePage'))
+const HowItWorksPage  = lazy(() => import('./pages/HowItWorksPage'))
+const VendorsPage     = lazy(() => import('./pages/VendorsPage'))
+const RidersPage      = lazy(() => import('./pages/RidersPage'))
+const BlogIndexPage   = lazy(() => import('./pages/BlogIndexPage'))
+const BlogPostPage    = lazy(() => import('./pages/BlogPostPage'))
+const StudioPage      = lazy(() => import('./pages/StudioPage'))
 const TermsAndConditionsPage = lazy(() => import('./pages/TermsAndConditionsPage'))
-const AccountDeletionPage = lazy(() => import('./pages/AccountDeletionPage'))
+const AccountDeletionPage    = lazy(() => import('./pages/AccountDeletionPage'))
 
 function App() {
   return (
     <Suspense fallback={<div className="min-h-screen bg-white" />}>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/blog" element={<BlogIndexPage />} />
-        <Route path="/blog/:slug" element={<BlogPostPage />} />
-        <Route path="/studio/*" element={<StudioPage />} />
-        <Route path="/terms" element={<TermsAndConditionsPage />} />
+        <Route path="/"             element={<HomePage />} />
+        <Route path="/how-it-works" element={<HowItWorksPage />} />
+        <Route path="/vendors"      element={<VendorsPage />} />
+        <Route path="/riders"       element={<RidersPage />} />
+        <Route path="/blog"         element={<BlogIndexPage />} />
+        <Route path="/blog/:slug"   element={<BlogPostPage />} />
+        <Route path="/studio/*"     element={<StudioPage />} />
+        <Route path="/terms"        element={<TermsAndConditionsPage />} />
         <Route path="/account-deletion" element={<AccountDeletionPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*"             element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
   )

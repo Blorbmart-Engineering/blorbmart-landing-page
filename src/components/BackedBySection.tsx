@@ -109,11 +109,11 @@ export default function BackedBySection() {
               transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ scale: 1.03 }}
             >
-              <img src="/brivent.png" alt="Privent — backer of Blorbmart" loading="lazy" decoding="async" />
+              <img src="/brivent.png" alt="Brivent — backer of Blorbmart" loading="lazy" decoding="async" />
             </motion.div>
 
             <p className="backed-tagline">
-              Blorbmart is proudly supported by Privent — building the future of campus commerce in Nigeria.
+              Blorbmart is proudly supported by Brivent — building the future of campus commerce in Nigeria.
             </p>
           </motion.div>
         </div>

@@ -1,22 +1,16 @@
-import About from '../components/About'
 import BackedBySection from '../components/BackedBySection'
-import CommissionSection from '../components/CommissionSection'
 import CustomerCareSection from '../components/CustomerCareSection'
 import FAQ, { faqItems, faqStructuredData } from '../components/FAQ'
 import FoodSection from '../components/FoodSection'
 import Hero from '../components/Hero'
-import HowItWorks from '../components/HowItWorks'
+import Insights from '../components/Insights'
 import MobileApp from '../components/MobileApp'
 import PageShell from '../components/PageShell'
-import RiderSection from '../components/RiderSection'
 import SEO from '../components/SEO'
-import SellerRulesSection from '../components/SellerRulesSection'
-import SellerSection from '../components/SellerSection'
 import SeoNotice from '../components/SeoNotice'
 import Team, { teamStructuredData } from '../components/Team'
 import { useRecentPosts } from '../hooks/useBlogPosts'
 import { siteConfig } from '../siteConfig'
-import Insights from '../components/Insights'
 
 const structuredData = [
   {
@@ -82,7 +76,7 @@ export default function HomePage() {
     <>
       <SEO
         title="Blorbmart | Campus Marketplace & Food Delivery for UNIOSUN Students"
-        description="Blorbmart is UNIOSUN's campus marketplace — order food from Mijas Pasta, Tasty Garnished Kitchen, and more. Buy and sell fashion, beauty, stationery, electronics, and more. Fast delivery by Campus Runs across Shasha, Nipco, URP Area, Cele, and beyond."
+        description="Blorbmart is UNIOSUN's campus marketplace — order food from Mijas Pasta, Tasty Garnished Kitchen, and more. Buy and sell fashion, beauty, stationery, electronics, and more. Fast delivery by Campus Runs."
         keywords={[
           'campus marketplace UNIOSUN',
           'student marketplace Nigeria',
@@ -104,18 +98,12 @@ export default function HomePage() {
           <Hero />
           <FoodSection />
           <BackedBySection />
-          <HowItWorks />
-          <SellerSection />
-          <CommissionSection />
-          <SellerRulesSection />
-          <RiderSection />
           <CustomerCareSection />
           <Team />
           <Insights articles={recentPosts} />
           <SeoNotice />
           <MobileApp />
           <FAQ items={faqItems} />
-          <About />
         </main>
       </PageShell>
     </>
