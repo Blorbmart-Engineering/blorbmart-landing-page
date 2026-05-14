@@ -1,5 +1,7 @@
 import About from '../components/About'
+import BackedBySection from '../components/BackedBySection'
 import CommissionSection from '../components/CommissionSection'
+import CustomerCareSection from '../components/CustomerCareSection'
 import FAQ, { faqItems, faqStructuredData } from '../components/FAQ'
 import FoodSection from '../components/FoodSection'
 import Hero from '../components/Hero'
@@ -101,17 +103,19 @@ export default function HomePage() {
         <main>
           <Hero />
           <FoodSection />
-          <About />
+          <BackedBySection />
           <HowItWorks />
           <SellerSection />
           <CommissionSection />
           <SellerRulesSection />
           <RiderSection />
+          <CustomerCareSection />
           <Team />
           <Insights articles={recentPosts} />
           <SeoNotice />
           <MobileApp />
           <FAQ items={faqItems} />
+          <About />
         </main>
       </PageShell>
     </>

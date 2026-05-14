@@ -1,3 +1,6 @@
+import { motion } from 'framer-motion'
+import { ShoppingCart, Star1, Location, Clock, Tag } from 'iconsax-react'
+
 const restaurants = [
   {
     name: 'Mijas Pasta',
@@ -8,11 +11,13 @@ const restaurants = [
     rating: '4.9',
     reviews: '240',
     specialties: ['Pasta', 'Stir-fry', 'Continental', 'Grills'],
-    headerGradient: 'linear-gradient(135deg, #f97316 0%, #c2410c 100%)',
-    btnGradient: 'linear-gradient(135deg, #f97316, #ea580c)',
-    accentColor: '#f97316',
+    image: '/mijas%20pasta.png',
+    imageAlt: 'Mijas Pasta food at UNIOSUN campus',
     badge: 'Most Popular',
-    timeColor: '#fb923c',
+    accentMain: '#ff5500',
+    accentSecond: '#ffc200',
+    btnGradient: 'linear-gradient(135deg, #ff5500, #e63e00)',
+    btnShadow: 'rgba(255,85,0,0.45)',
   },
   {
     name: 'Tasty Garnished Kitchen',
@@ -23,11 +28,14 @@ const restaurants = [
     rating: '4.8',
     reviews: '182',
     specialties: ['Jollof Rice', 'Fried Rice', 'Egusi Soup', 'Stew'],
+    image: null,
+    imageAlt: null,
     headerGradient: 'linear-gradient(135deg, #16a34a 0%, #14532d 100%)',
-    btnGradient: 'linear-gradient(135deg, #22c55e, #16a34a)',
-    accentColor: '#22c55e',
     badge: 'Recommended',
-    timeColor: '#4ade80',
+    accentMain: '#22c55e',
+    accentSecond: '#4ade80',
+    btnGradient: 'linear-gradient(135deg, #22c55e, #16a34a)',
+    btnShadow: 'rgba(34,197,94,0.4)',
   },
 ]
 
@@ -37,45 +45,27 @@ const deliveryZones = [
   'UNIOSUN Gate', 'Hostel Area',
 ]
 
-function UtilsIcon({ type }: { type: 'pin' | 'clock' | 'tag' }) {
-  if (type === 'pin') return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
-  )
-  if (type === 'clock') return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
-  )
-  return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
-      <line x1="7" y1="7" x2="7.01" y2="7" />
-    </svg>
-  )
+const cardVariants = {
+  hidden: { opacity: 0, y: 50, scale: 0.96 },
+  visible: (i: number) => ({
+    opacity: 1, y: 0, scale: 1,
+    transition: { duration: 0.65, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] },
+  }),
 }
 
-function StarRating() {
+const physicsOrbs = [
+  { w: 480, h: 480, x: '5%', y: '10%', color: 'rgba(255,85,0,0.12)', dur: 11, dx: [0, 30, -20, 0], dy: [0, -40, 25, 0] },
+  { w: 360, h: 360, x: '65%', y: '-5%', color: 'rgba(255,194,0,0.08)', dur: 14, dx: [0, -35, 20, 0], dy: [0, 30, -40, 0] },
+  { w: 280, h: 280, x: '80%', y: '60%', color: 'rgba(255,85,0,0.07)', dur: 9, dx: [0, 25, -30, 0], dy: [0, -20, 35, 0] },
+]
+
+function StarFill({ count = 5 }: { count?: number }) {
   return (
-    <svg width="70" height="14" viewBox="0 0 70 14" fill="none">
-      {[0, 14, 28, 42, 56].map((x) => (
-        <polygon key={x} points={`${x + 7} 1 ${x + 8.8} 5.2 ${x + 13.5} 5.5 ${x + 10} 8.5 ${x + 11.2} 13 ${x + 7} 10.5 ${x + 2.8} 13 ${x + 4} 8.5 ${x + 0.5} 5.5 ${x + 5.2} 5.2`} fill="#fbbf24" />
+    <div style={{ display: 'flex', gap: 2 }}>
+      {Array.from({ length: count }).map((_, i) => (
+        <Star1 key={i} size={13} color="#ffc200" variant="Bold" />
       ))}
-    </svg>
-  )
-}
-
-function UtensilsIcon() {
-  return (
-    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-      <path d="M7 2v20" />
-      <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3z" />
-      <path d="M21 22v-7" />
-    </svg>
+    </div>
   )
 }
 
@@ -85,19 +75,10 @@ export default function FoodSection() {
       <style>{`
         .food-section {
           background: #07101f;
-          padding: 112px 24px 120px;
+          padding: 112px 24px 128px;
           position: relative;
           overflow: hidden;
-          font-family: 'DM Sans', sans-serif;
-        }
-        .food-section::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background:
-            radial-gradient(ellipse 65% 55% at 15% 35%, rgba(249,115,22,0.1) 0%, transparent 60%),
-            radial-gradient(ellipse 45% 40% at 85% 65%, rgba(34,197,94,0.07) 0%, transparent 55%);
-          pointer-events: none;
+          font-family: 'Raleway', 'DM Sans', sans-serif;
         }
         .food-shell {
           max-width: 1200px;
@@ -109,352 +90,307 @@ export default function FoodSection() {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          padding: 8px 18px;
+          padding: 8px 20px;
           border-radius: 999px;
-          background: rgba(249,115,22,0.1);
-          border: 1px solid rgba(249,115,22,0.25);
+          background: rgba(255,85,0,0.1);
+          border: 1px solid rgba(255,85,0,0.28);
           margin-bottom: 28px;
         }
         .food-label-dot {
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background: #f97316;
-          box-shadow: 0 0 12px rgba(249,115,22,0.7);
+          width: 7px; height: 7px; border-radius: 50%;
+          background: #ff5500;
+          box-shadow: 0 0 14px rgba(255,85,0,0.8);
           animation: foodPulse 2s ease-in-out infinite;
         }
         @keyframes foodPulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.6; transform: scale(0.85); }
         }
         .food-label span {
-          font-size: 11.5px;
-          font-weight: 800;
-          color: #fb923c;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          font-family: 'Sora', sans-serif;
+          font-size: 11.5px; font-weight: 800; color: #ff7733;
+          letter-spacing: 0.1em; text-transform: uppercase;
+          font-family: 'Raleway', sans-serif;
         }
         .food-headline {
-          font-family: 'Sora', sans-serif;
-          font-size: clamp(2.8rem, 6vw, 4.4rem);
+          font-family: 'Raleway', 'Sora', sans-serif;
+          font-size: clamp(2.8rem, 6vw, 4.6rem);
           font-weight: 900;
           line-height: 1.02;
           letter-spacing: -0.04em;
           color: white;
-          margin: 0 0 16px;
+          margin: 0 0 18px;
         }
         .food-headline-accent {
           display: block;
-          background: linear-gradient(90deg, #fb923c 0%, #fbbf24 100%);
+          background: linear-gradient(90deg, #ff5500 0%, #ffc200 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
         .food-sub {
-          font-size: 1.05rem;
-          color: rgba(255,255,255,0.5);
-          line-height: 1.75;
+          font-size: 1.07rem;
+          color: rgba(255,255,255,0.52);
+          line-height: 1.78;
           max-width: 560px;
-          margin: 0 0 56px;
+          margin: 0 0 60px;
+          font-weight: 500;
+          font-family: 'Raleway', sans-serif;
         }
         .food-cards {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 20px;
-          margin-bottom: 40px;
+          gap: 24px;
+          margin-bottom: 44px;
         }
         .food-card {
-          border-radius: 22px;
+          border-radius: 26px;
           overflow: hidden;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.07);
-          transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), border-color 0.3s, box-shadow 0.3s;
+          background: rgba(255,255,255,0.035);
+          border: 1px solid rgba(255,255,255,0.08);
+          transition: border-color 0.3s, box-shadow 0.3s;
         }
         .food-card:hover {
-          transform: translateY(-8px);
-          border-color: rgba(255,255,255,0.12);
-          box-shadow: 0 32px 64px rgba(0,0,0,0.5);
+          border-color: rgba(255,255,255,0.14);
+          box-shadow: 0 36px 80px rgba(0,0,0,0.55);
         }
         .food-card-hero {
           position: relative;
-          height: 160px;
+          height: 200px;
+          overflow: hidden;
           display: flex;
           align-items: center;
           justify-content: center;
-          overflow: hidden;
         }
-        .food-card-hero::after {
-          content: '';
+        .food-card-hero img {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.4) 100%);
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
         }
-        .food-card-hero-icon {
-          position: relative;
-          z-index: 1;
-          opacity: 0.95;
+        .food-card-hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 100%);
         }
         .food-card-badge {
           position: absolute;
-          top: 14px;
-          right: 14px;
-          z-index: 2;
-          padding: 5px 12px;
+          top: 14px; right: 14px; z-index: 2;
+          padding: 5px 13px;
           border-radius: 999px;
-          background: rgba(0,0,0,0.5);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(255,255,255,0.15);
-          font-size: 10.5px;
-          font-weight: 800;
-          color: white;
-          letter-spacing: 0.07em;
-          text-transform: uppercase;
-          font-family: 'Sora', sans-serif;
+          background: rgba(0,0,0,0.55);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255,255,255,0.18);
+          font-size: 10px; font-weight: 800; color: white;
+          letter-spacing: 0.08em; text-transform: uppercase;
+          font-family: 'Raleway', sans-serif;
         }
-        .food-card-body {
-          padding: 24px;
-        }
+        .food-card-body { padding: 26px; }
         .food-card-meta {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 12px;
+          display: flex; align-items: center; justify-content: space-between;
+          margin-bottom: 14px;
         }
         .food-card-rating {
-          display: flex;
-          align-items: center;
-          gap: 8px;
+          display: flex; align-items: center; gap: 8px;
         }
         .food-card-rating-num {
-          font-family: 'Sora', sans-serif;
-          font-weight: 800;
-          font-size: 14px;
-          color: white;
+          font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 14px; color: white;
         }
         .food-card-rating-count {
-          font-size: 12px;
-          color: rgba(255,255,255,0.35);
+          font-size: 12px; color: rgba(255,255,255,0.32); font-weight: 500;
         }
         .food-card-time-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 5px;
-          padding: 4px 10px;
+          display: inline-flex; align-items: center; gap: 5px;
+          padding: 5px 12px;
           border-radius: 999px;
           background: rgba(255,255,255,0.07);
-          border: 1px solid rgba(255,255,255,0.1);
-          font-size: 12px;
-          font-weight: 700;
-          font-family: 'Sora', sans-serif;
+          border: 1px solid rgba(255,255,255,0.12);
+          font-size: 12px; font-weight: 700;
+          font-family: 'Raleway', sans-serif;
+          color: rgba(255,255,255,0.65);
         }
         .food-card-name {
-          font-family: 'Sora', sans-serif;
-          font-weight: 900;
-          font-size: 1.5rem;
-          color: white;
-          letter-spacing: -0.02em;
-          margin: 0 0 4px;
-          line-height: 1.15;
+          font-family: 'Raleway', 'Sora', sans-serif;
+          font-weight: 900; font-size: 1.55rem; color: white;
+          letter-spacing: -0.025em; margin: 0 0 4px; line-height: 1.15;
         }
         .food-card-cuisine {
-          font-size: 13px;
-          color: rgba(255,255,255,0.4);
-          margin-bottom: 18px;
+          font-size: 13px; color: rgba(255,255,255,0.38); margin-bottom: 20px; font-weight: 500;
         }
-        .food-card-divider {
-          height: 1px;
-          background: rgba(255,255,255,0.07);
-          margin-bottom: 18px;
-        }
+        .food-card-divider { height: 1px; background: rgba(255,255,255,0.06); margin-bottom: 20px; }
         .food-card-info {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 10px;
-          margin-bottom: 18px;
+          display: grid; grid-template-columns: 1fr 1fr;
+          gap: 10px; margin-bottom: 20px;
         }
         .food-card-info-item {
-          display: flex;
-          align-items: center;
-          gap: 7px;
-          font-size: 13px;
-          color: rgba(255,255,255,0.6);
-        }
-        .food-card-info-item svg {
-          flex-shrink: 0;
-          opacity: 0.6;
+          display: flex; align-items: center; gap: 7px;
+          font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500;
         }
         .food-card-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 6px;
-          margin-bottom: 20px;
+          display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px;
         }
         .food-card-tag {
-          padding: 4px 10px;
-          border-radius: 8px;
+          padding: 4px 12px;
+          border-radius: 9px;
           background: rgba(255,255,255,0.05);
           border: 1px solid rgba(255,255,255,0.08);
-          font-size: 12px;
-          font-weight: 500;
-          color: rgba(255,255,255,0.55);
-          letter-spacing: 0.01em;
+          font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5);
         }
         .food-card-cta {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          width: 100%;
-          padding: 13px;
-          border-radius: 14px;
-          font-size: 14px;
-          font-weight: 800;
-          color: white;
-          text-decoration: none;
-          border: none;
-          cursor: pointer;
-          font-family: 'Sora', sans-serif;
-          transition: opacity 0.2s, transform 0.2s;
+          display: flex; align-items: center; justify-content: center; gap: 9px;
+          width: 100%; padding: 14px;
+          border-radius: 16px;
+          font-size: 14px; font-weight: 800; color: white;
+          text-decoration: none; border: none; cursor: pointer;
+          font-family: 'Raleway', sans-serif;
+          transition: opacity 0.2s, transform 0.18s;
           letter-spacing: 0.01em;
         }
-        .food-card-cta:hover {
-          opacity: 0.88;
-          transform: scale(0.985);
-        }
-        .food-zones-block {
-          margin-bottom: 48px;
-        }
+        .food-card-cta:hover { opacity: 0.88; transform: scale(0.985); }
+
+        .food-zones-block { margin-bottom: 52px; }
         .food-zones-label {
-          font-size: 11px;
-          font-weight: 800;
+          font-size: 11px; font-weight: 800;
           color: rgba(255,255,255,0.3);
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          margin-bottom: 12px;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-family: 'Sora', sans-serif;
+          letter-spacing: 0.12em; text-transform: uppercase;
+          margin-bottom: 14px;
+          display: flex; align-items: center; gap: 10px;
+          font-family: 'Raleway', sans-serif;
         }
         .food-zones-label::after {
-          content: '';
-          flex: 1;
-          height: 1px;
-          background: rgba(255,255,255,0.07);
+          content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.06);
         }
-        .food-zones {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-        }
+        .food-zones { display: flex; flex-wrap: wrap; gap: 9px; }
         .food-zone {
-          padding: 6px 14px;
-          border-radius: 10px;
+          padding: 7px 16px;
+          border-radius: 11px;
           background: rgba(255,255,255,0.04);
           border: 1px solid rgba(255,255,255,0.08);
-          font-size: 12.5px;
-          font-weight: 600;
-          color: rgba(255,255,255,0.5);
+          font-size: 12.5px; font-weight: 600;
+          color: rgba(255,255,255,0.48);
           transition: background 0.18s, color 0.18s, border-color 0.18s;
           cursor: default;
+          font-family: 'Raleway', sans-serif;
         }
         .food-zone:hover {
-          background: rgba(249,115,22,0.1);
-          border-color: rgba(249,115,22,0.2);
-          color: #fb923c;
+          background: rgba(255,85,0,0.1);
+          border-color: rgba(255,85,0,0.22);
+          color: #ff7733;
         }
+
         .food-cta-bar {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 24px;
-          flex-wrap: wrap;
-          padding: 36px 40px;
-          border-radius: 22px;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.08);
+          display: flex; align-items: center; justify-content: space-between;
+          gap: 24px; flex-wrap: wrap;
+          padding: 38px 44px;
+          border-radius: 26px;
+          background: rgba(255,85,0,0.06);
+          border: 1px solid rgba(255,85,0,0.14);
+          backdrop-filter: blur(10px);
         }
         .food-cta-text strong {
-          display: block;
-          font-family: 'Sora', sans-serif;
-          font-size: 1.3rem;
-          font-weight: 800;
-          color: white;
-          margin-bottom: 5px;
-          letter-spacing: -0.02em;
+          display: block; font-family: 'Raleway', sans-serif;
+          font-size: 1.35rem; font-weight: 900; color: white;
+          margin-bottom: 6px; letter-spacing: -0.02em;
         }
         .food-cta-text span {
-          font-size: 0.9rem;
-          color: rgba(255,255,255,0.45);
-          line-height: 1.6;
+          font-size: 0.92rem; color: rgba(255,255,255,0.45);
+          line-height: 1.6; font-weight: 500;
         }
         .food-cta-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 15px 32px;
-          border-radius: 14px;
-          background: linear-gradient(135deg, #f97316, #ea580c);
-          color: white;
-          font-weight: 800;
-          font-size: 0.95rem;
-          text-decoration: none;
-          white-space: nowrap;
-          box-shadow: 0 8px 32px rgba(249,115,22,0.35);
+          display: inline-flex; align-items: center; gap: 10px;
+          padding: 16px 34px;
+          border-radius: 16px;
+          background: linear-gradient(135deg, #ff5500, #e63e00);
+          color: white; font-weight: 900; font-size: 0.97rem;
+          text-decoration: none; white-space: nowrap;
+          box-shadow: 0 10px 36px rgba(255,85,0,0.42);
           transition: transform 0.2s, box-shadow 0.2s;
-          font-family: 'Sora', sans-serif;
-          letter-spacing: 0.01em;
+          font-family: 'Raleway', sans-serif;
+          letter-spacing: 0.02em;
         }
         .food-cta-btn:hover {
           transform: translateY(-3px);
-          box-shadow: 0 16px 48px rgba(249,115,22,0.45);
+          box-shadow: 0 20px 52px rgba(255,85,0,0.55);
         }
         @media (max-width: 768px) {
-          .food-section { padding: 88px 16px 96px; }
+          .food-section { padding: 90px 16px 100px; }
           .food-cards { grid-template-columns: 1fr; }
-          .food-cta-bar { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+          .food-cta-bar { padding: 26px 22px; flex-direction: column; align-items: flex-start; }
           .food-cta-btn { width: 100%; justify-content: center; }
           .food-card-info { grid-template-columns: 1fr; }
         }
       `}</style>
 
       <section id="food" className="food-section" aria-labelledby="food-heading">
+        {/* Physics background orbs */}
+        {physicsOrbs.map((o, i) => (
+          <motion.div
+            key={i}
+            animate={{ x: o.dx, y: o.dy }}
+            transition={{ duration: o.dur, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              position: 'absolute', left: o.x, top: o.y,
+              width: o.w, height: o.h, borderRadius: '50%', pointerEvents: 'none',
+              background: `radial-gradient(circle, ${o.color}, transparent 70%)`,
+              filter: 'blur(70px)',
+            }}
+          />
+        ))}
+
         <div className="food-shell">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="food-label">
+              <span className="food-label-dot" />
+              <span>Live Now — Order Food</span>
+            </div>
 
-          <div className="food-label">
-            <span className="food-label-dot" />
-            <span>New Feature — Live Now</span>
-          </div>
-
-          <h2 id="food-heading" className="food-headline">
-            Hungry on campus?
-            <span className="food-headline-accent">Order from the best.</span>
-          </h2>
-          <p className="food-sub">
-            Blorbmart now delivers hot meals from UNIOSUN's most-loved restaurants straight to you.
-            Between classes, in your hostel, or anywhere in our delivery zones — food arrives fast.
-          </p>
+            <h2 id="food-heading" className="food-headline">
+              Hungry on campus?
+              <span className="food-headline-accent">Order from the best.</span>
+            </h2>
+            <p className="food-sub">
+              Blorbmart delivers hot meals from UNIOSUN's most-loved restaurants straight to you.
+              Between classes, in your hostel, or anywhere in our delivery zones — food arrives fast.
+            </p>
+          </motion.div>
 
           <div className="food-cards">
-            {restaurants.map((r) => (
-              <article key={r.name} className="food-card">
-                <div className="food-card-hero" style={{ background: r.headerGradient }}>
-                  <div className="food-card-hero-icon">
-                    <UtensilsIcon />
-                  </div>
+            {restaurants.map((r, i) => (
+              <motion.article
+                key={r.name}
+                custom={i}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-60px' }}
+                whileHover={{ y: -10, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
+                className="food-card"
+              >
+                <div className="food-card-hero">
+                  {r.image ? (
+                    <img src={r.image} alt={r.imageAlt ?? r.name} loading="lazy" decoding="async" />
+                  ) : (
+                    <div style={{ position: 'absolute', inset: 0, background: r.headerGradient }} />
+                  )}
+                  <div className="food-card-hero-overlay" />
                   <span className="food-card-badge">{r.badge}</span>
                 </div>
 
                 <div className="food-card-body">
                   <div className="food-card-meta">
                     <div className="food-card-rating">
-                      <StarRating />
+                      <StarFill />
                       <span className="food-card-rating-num">{r.rating}</span>
-                      <span className="food-card-rating-count">({r.reviews} reviews)</span>
+                      <span className="food-card-rating-count">({r.reviews})</span>
                     </div>
-                    <div className="food-card-time-pill" style={{ color: r.timeColor }}>
-                      <UtilsIcon type="clock" />
+                    <div className="food-card-time-pill">
+                      <Clock size={12} color="currentColor" variant="Bold" />
                       {r.time}
                     </div>
                   </div>
@@ -465,17 +401,17 @@ export default function FoodSection() {
 
                   <div className="food-card-info">
                     <div className="food-card-info-item">
-                      <UtilsIcon type="pin" />
+                      <Location size={13} color={r.accentMain} variant="Bold" />
                       {r.location}
                     </div>
                     <div className="food-card-info-item">
-                      <UtilsIcon type="tag" />
+                      <Tag size={13} color={r.accentSecond} variant="Bold" />
                       Min {r.minOrder}
                     </div>
                   </div>
 
                   <div className="food-card-tags">
-                    {r.specialties.map((s) => (
+                    {r.specialties.map(s => (
                       <span key={s} className="food-card-tag">{s}</span>
                     ))}
                   </div>
@@ -483,40 +419,52 @@ export default function FoodSection() {
                   <a
                     href="/#download"
                     className="food-card-cta"
-                    style={{ background: r.btnGradient }}
+                    style={{ background: r.btnGradient, boxShadow: `0 8px 28px ${r.btnShadow}` }}
                   >
+                    <ShoppingCart size={16} color="white" variant="Bold" />
                     Order Now
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
                   </a>
                 </div>
-              </article>
+              </motion.article>
             ))}
           </div>
 
-          <div className="food-zones-block">
+          <motion.div
+            className="food-zones-block"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          >
             <div className="food-zones-label">Delivery zones</div>
             <div className="food-zones">
-              {deliveryZones.map((z) => (
-                <span key={z} className="food-zone">{z}</span>
+              {deliveryZones.map(z => (
+                <motion.span
+                  key={z}
+                  className="food-zone"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.15 }}
+                >{z}</motion.span>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="food-cta-bar">
+          <motion.div
+            className="food-cta-bar"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
             <div className="food-cta-text">
               <strong>Download the app to start ordering</strong>
               <span>Get food from UNIOSUN's best spots delivered fast. Built for student life.</span>
             </div>
             <a href="/#download" className="food-cta-btn">
               Order Food Now
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
+              <ShoppingCart size={18} color="white" variant="Bold" />
             </a>
-          </div>
-
+          </motion.div>
         </div>
       </section>
     </>
