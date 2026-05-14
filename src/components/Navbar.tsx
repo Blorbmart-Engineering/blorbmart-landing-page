@@ -1,103 +1,336 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const links = [
     { label: 'Home', href: '/#home' },
-    { label: 'About', href: '/#about' },
+    { label: 'Food', href: '/#food', highlight: true },
     { label: 'How It Works', href: '/#how-it-works' },
-    { label: 'Sellers', href: '/#sellers' },
+    { label: 'Vendors', href: '/#sellers' },
     { label: 'Riders', href: '/#riders' },
-    { label: 'Team', href: '/#team' },
     { label: 'Blog', href: '/blog' },
-    { label: 'Terms & Conditions', href: '/terms' },
-    { label: 'Download', href: '/#download' },
   ]
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-2 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="rounded-[26px] border border-white/80 bg-white/85 shadow-[0_18px_40px_rgba(15,23,42,0.12),inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-6px_18px_rgba(148,163,184,0.12)] backdrop-blur-xl">
-          <div className="flex min-h-[56px] items-center justify-between px-4 sm:px-6">
-            <div className="flex items-center gap-4">
-              <a href="/#home" className="flex items-center no-underline" aria-label="Blorbmart home">
-                <img
-                  src="/fulllogo.png"
-                  alt="Blorbmart campus marketplace logo"
-                  className="h-12 w-auto object-contain sm:h-14"
-                  fetchPriority="high"
-                />
-              </a>
-            </div>
+    <>
+      <style>{`
+        .nb-wrap {
+          position: fixed;
+          inset: 0 0 auto;
+          z-index: 50;
+          padding: 10px 16px 0;
+        }
+        @media (min-width: 640px) { .nb-wrap { padding: 12px 24px 0; } }
+        @media (min-width: 1024px) { .nb-wrap { padding: 12px 32px 0; } }
 
-            <nav className="hidden items-center space-x-6 md:flex" aria-label="Primary navigation">
-              {links.map((l) => (
-                <a
-                  key={l.label}
-                  href={l.href}
-                  className="text-sm font-medium text-slate-700 transition hover:text-blue-600"
-                >
-                  {l.label}
-                </a>
-              ))}
-            </nav>
+        .nb-pill {
+          max-width: 1280px;
+          margin: 0 auto;
+          border-radius: 28px;
+          border: 1px solid rgba(255,255,255,0.75);
+          background: rgba(255,255,255,0.92);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 20px;
+          min-height: 88px;
+          gap: 16px;
+          transition: box-shadow 0.3s, border-color 0.3s, background 0.3s;
+        }
+        .nb-pill.scrolled {
+          background: rgba(255,255,255,0.97);
+          border-color: rgba(203,213,225,0.5);
+          box-shadow: 0 8px 40px rgba(15,23,42,0.1), 0 1px 0 rgba(255,255,255,0.9);
+        }
+        .nb-pill:not(.scrolled) {
+          box-shadow: 0 8px 32px rgba(15,23,42,0.08);
+        }
 
-            <div className="hidden items-center space-x-3 md:flex">
+        .nb-logo {
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          flex-shrink: 0;
+        }
+        .nb-logo img {
+          height: 80px;
+          width: auto;
+          object-fit: contain;
+          display: block;
+        }
+        @media (max-width: 767px) {
+          .nb-logo img { height: 62px; }
+          .nb-pill { min-height: 72px; }
+        }
+
+        .nb-nav {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+        }
+        .nb-link {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 8px 14px;
+          border-radius: 12px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #475569;
+          text-decoration: none;
+          transition: color 0.18s, background 0.18s;
+          font-family: 'DM Sans', sans-serif;
+          white-space: nowrap;
+        }
+        .nb-link:hover { color: #0f172a; background: rgba(15,23,42,0.05); }
+        .nb-link.food-link { color: #ea580c; }
+        .nb-link.food-link:hover { color: #f97316; background: rgba(249,115,22,0.07); }
+
+        .nb-food-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #f97316;
+          display: inline-block;
+          flex-shrink: 0;
+          animation: nbPulse 2.2s ease-in-out infinite;
+        }
+        @keyframes nbPulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.4); }
+          50% { box-shadow: 0 0 0 4px rgba(249,115,22,0); }
+        }
+
+        .nb-actions {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .nb-sell-link {
+          padding: 8px 14px;
+          border-radius: 12px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #475569;
+          text-decoration: none;
+          transition: color 0.18s, background 0.18s;
+          white-space: nowrap;
+        }
+        .nb-sell-link:hover { color: #0f172a; background: rgba(15,23,42,0.05); }
+
+        .nb-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 11px 22px;
+          border-radius: 14px;
+          background: #0f172a;
+          color: #fff;
+          font-size: 0.875rem;
+          font-weight: 700;
+          text-decoration: none;
+          white-space: nowrap;
+          transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+          box-shadow: 0 4px 16px rgba(15,23,42,0.2);
+          font-family: 'Sora', sans-serif;
+        }
+        .nb-cta:hover {
+          background: #1e293b;
+          transform: translateY(-1px);
+          box-shadow: 0 8px 24px rgba(15,23,42,0.28);
+        }
+
+        .nb-hamburger {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          border: 1.5px solid #e2e8f0;
+          background: white;
+          color: #475569;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+        .nb-hamburger:hover, .nb-hamburger.open { color: #0f172a; background: #f8fafc; }
+
+        .nb-mobile {
+          overflow: hidden;
+          transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s;
+        }
+        .nb-mobile-inner {
+          border-top: 1px solid #f1f5f9;
+          padding: 12px 4px 16px;
+        }
+        .nb-mobile-link {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 16px;
+          border-radius: 14px;
+          font-size: 0.975rem;
+          font-weight: 600;
+          color: #334155;
+          text-decoration: none;
+          transition: background 0.15s, color 0.15s;
+          font-family: 'DM Sans', sans-serif;
+        }
+        .nb-mobile-link:hover { background: #f8fafc; color: #0f172a; }
+        .nb-mobile-link.food { color: #ea580c; }
+        .nb-mobile-link.food:hover { background: rgba(249,115,22,0.06); color: #f97316; }
+        .nb-mobile-btns {
+          display: grid;
+          gap: 8px;
+          padding: 12px 4px 0;
+          border-top: 1px solid #f1f5f9;
+          margin-top: 8px;
+        }
+        .nb-mobile-sell {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 13px;
+          border-radius: 14px;
+          border: 1.5px solid #e2e8f0;
+          background: #f8fafc;
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #334155;
+          text-decoration: none;
+          transition: background 0.15s;
+        }
+        .nb-mobile-sell:hover { background: #f1f5f9; }
+        .nb-mobile-cta {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 14px;
+          border-radius: 14px;
+          background: #0f172a;
+          font-size: 0.975rem;
+          font-weight: 700;
+          color: white;
+          text-decoration: none;
+          box-shadow: 0 4px 16px rgba(15,23,42,0.25);
+          font-family: 'Sora', sans-serif;
+        }
+
+        @media (min-width: 768px) {
+          .nb-nav { display: flex !important; }
+          .nb-actions { display: flex !important; }
+          .nb-hamburger { display: none !important; }
+          .nb-mobile { display: none !important; }
+        }
+        @media (max-width: 767px) {
+          .nb-nav { display: none !important; }
+          .nb-actions { display: none !important; }
+          .nb-hamburger { display: flex !important; }
+        }
+      `}</style>
+
+      <header className="nb-wrap">
+        <div className={`nb-pill ${scrolled ? 'scrolled' : ''}`}>
+          <a href="/#home" className="nb-logo" aria-label="Blorbmart">
+            <img src="/fulllogo.png" alt="Blorbmart" fetchPriority="high" />
+          </a>
+
+          <nav className="nb-nav" aria-label="Primary navigation">
+            {links.map((l) => (
               <a
-                href="/#download"
-                className="rounded-full border border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] px-4 py-2 text-sm font-semibold text-slate-800 shadow-[0_10px_24px_rgba(148,163,184,0.18),inset_0_1px_0_rgba(255,255,255,0.95)] transition hover:-translate-y-0.5 hover:text-blue-600"
+                key={l.label}
+                href={l.href}
+                className={`nb-link ${l.highlight ? 'food-link' : ''}`}
               >
-                Download App
+                {l.highlight && <span className="nb-food-dot" />}
+                {l.label}
               </a>
-            </div>
+            ))}
+          </nav>
 
-            <div className="flex items-center md:hidden">
-              <button
-                onClick={() => setOpen((v) => !v)}
-                aria-label="Toggle menu"
-                aria-expanded={open}
-                className="rounded-full border border-slate-200 bg-white/70 p-2 text-slate-700 shadow-[0_8px_18px_rgba(148,163,184,0.18)] transition hover:text-blue-600"
-              >
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  {open ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  )}
-                </svg>
-              </button>
-            </div>
+          <div className="nb-actions">
+            <a href="/#sellers" className="nb-sell-link">Start Selling</a>
+            <a href="/#download" className="nb-cta">
+              Get the App
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
           </div>
-          <div
-            className={`overflow-hidden transition-[max-height,opacity,padding] duration-300 ease-out md:hidden ${
-              open ? 'max-h-[520px] opacity-100 px-4 pb-4 sm:px-6 sm:pb-6' : 'max-h-0 opacity-0 px-4 pb-0 sm:px-6'
-            }`}
+
+          <button
+            className={`nb-hamburger ${open ? 'open' : ''}`}
+            onClick={() => setOpen(v => !v)}
+            aria-label="Menu"
+            aria-expanded={open}
           >
-            <div className="border-t border-slate-100/80 pt-4">
-              <nav className="flex flex-col space-y-5" aria-label="Mobile navigation">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+              {open
+                ? <path d="M6 18L18 6M6 6l12 12" strokeLinejoin="round" />
+                : <><path d="M4 6h16" /><path d="M4 12h12" /><path d="M4 18h8" /></>}
+            </svg>
+          </button>
+        </div>
+
+        <div
+          className="nb-mobile"
+          style={{
+            maxWidth: 1280,
+            margin: '0 auto',
+            maxHeight: open ? 600 : 0,
+            opacity: open ? 1 : 0,
+          }}
+        >
+          <div
+            style={{
+              background: 'rgba(255,255,255,0.97)',
+              backdropFilter: 'blur(24px)',
+              borderRadius: '0 0 24px 24px',
+              border: '1px solid rgba(203,213,225,0.5)',
+              borderTop: 'none',
+              marginTop: -1,
+            }}
+          >
+            <div className="nb-mobile-inner">
+              <nav style={{ display: 'grid' }}>
                 {links.map((l) => (
                   <a
                     key={l.label}
                     href={l.href}
                     onClick={() => setOpen(false)}
-                    className="text-base font-medium text-slate-700 transition hover:text-blue-600"
+                    className={`nb-mobile-link ${l.highlight ? 'food' : ''}`}
                   >
+                    {l.highlight && <span className="nb-food-dot" />}
                     {l.label}
                   </a>
                 ))}
-                <a
-                  href="/#download"
-                  onClick={() => setOpen(false)}
-                  className="mt-2 inline-flex w-max rounded-full bg-[linear-gradient(135deg,#2563eb,#1d4ed8)] px-6 py-3 font-semibold text-white shadow-[0_14px_32px_rgba(37,99,235,0.32)]"
-                >
-                  Download App
-                </a>
               </nav>
+              <div className="nb-mobile-btns">
+                <a href="/#sellers" onClick={() => setOpen(false)} className="nb-mobile-sell">
+                  Start Selling on Blorbmart
+                </a>
+                <a href="/#download" onClick={() => setOpen(false)} className="nb-mobile-cta">
+                  Get the App
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   )
 }
