@@ -1,12 +1,36 @@
 const vendorCategories = [
-  { icon: '👗', label: 'Fashion', color: '#ec4899', bg: 'rgba(236,72,153,0.1)' },
-  { icon: '💄', label: 'Beauty', color: '#f43f5e', bg: 'rgba(244,63,94,0.1)' },
-  { icon: '🌹', label: 'Perfumes', color: '#a855f7', bg: 'rgba(168,85,247,0.1)' },
-  { icon: '📚', label: 'Stationery', color: '#3b82f6', bg: 'rgba(59,130,246,0.1)' },
-  { icon: '📱', label: 'Electronics', color: '#6366f1', bg: 'rgba(99,102,241,0.1)' },
-  { icon: '👜', label: 'Accessories', color: '#f59e0b', bg: 'rgba(245,158,11,0.1)' },
-  { icon: '💊', label: 'Health', color: '#10b981', bg: 'rgba(16,185,129,0.1)' },
-  { icon: '🛋️', label: 'Furniture', color: '#8b5cf6', bg: 'rgba(139,92,246,0.1)' },
+  {
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>,
+    label: 'Fashion', color: '#ec4899', bg: 'rgba(236,72,153,0.1)',
+  },
+  {
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>,
+    label: 'Beauty', color: '#f43f5e', bg: 'rgba(244,63,94,0.1)',
+  },
+  {
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>,
+    label: 'Perfumes', color: '#a855f7', bg: 'rgba(168,85,247,0.1)',
+  },
+  {
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>,
+    label: 'Stationery', color: '#3b82f6', bg: 'rgba(59,130,246,0.1)',
+  },
+  {
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+    label: 'Electronics', color: '#6366f1', bg: 'rgba(99,102,241,0.1)',
+  },
+  {
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>,
+    label: 'Accessories', color: '#f59e0b', bg: 'rgba(245,158,11,0.1)',
+  },
+  {
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,
+    label: 'Health', color: '#10b981', bg: 'rgba(16,185,129,0.1)',
+  },
+  {
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+    label: 'Furniture', color: '#8b5cf6', bg: 'rgba(139,92,246,0.1)',
+  },
 ]
 
 const sellerFeatures = [
@@ -141,8 +165,11 @@ export default function SellerSection() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 16px;
           flex-shrink: 0;
+        }
+        .seller-cat-icon svg {
+          width: 17px;
+          height: 17px;
         }
         .seller-stat-card,
         .seller-feature-card,
@@ -334,8 +361,8 @@ export default function SellerSection() {
               <div className="seller-cat-grid">
                 {vendorCategories.map((cat) => (
                   <div key={cat.label} className="seller-cat-chip">
-                    <div className="seller-cat-icon" style={{ background: cat.bg }}>
-                      <span>{cat.icon}</span>
+                    <div className="seller-cat-icon" style={{ background: cat.bg, color: cat.color }}>
+                      {cat.icon}
                     </div>
                     <span style={{ color: '#334155' }}>{cat.label}</span>
                   </div>

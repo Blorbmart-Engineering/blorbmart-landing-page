@@ -84,9 +84,7 @@ export default function RiderSection() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 16px;
           color: white;
-          font-weight: 900;
           flex-shrink: 0;
         }
         .rider-partner-label {
@@ -343,7 +341,14 @@ export default function RiderSection() {
           <div className="rider-top">
             <div>
               <div className="rider-partner-banner">
-                <div className="rider-partner-dot">CR</div>
+                <div className="rider-partner-dot">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="18.5" cy="17.5" r="3.5"/>
+                    <circle cx="5.5" cy="17.5" r="3.5"/>
+                    <circle cx="15" cy="5" r="1"/>
+                    <path d="M12 17.5V14l-3-3 4-3 2 3h2"/>
+                  </svg>
+                </div>
                 <div className="rider-partner-label">
                   <small>Official Logistics Partner</small>
                   <strong>Campus Runs</strong>
