@@ -101,7 +101,7 @@ export default function Footer() {
           margin-bottom: 48px;
         }
         .footer-brand img {
-          height: 60px;
+          height: 140px;
           width: auto;
           object-fit: contain;
           display: block;

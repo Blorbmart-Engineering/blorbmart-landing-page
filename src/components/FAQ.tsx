@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+
 export const faqItems = [
   {
     question: 'What is Blorbmart?',
@@ -37,7 +40,7 @@ export const faqItems = [
   {
     question: 'Can I earn money as a rider on Blorbmart?',
     answer:
-      'Yes. Apply through Campus Runs to join the rider network. You\'ll earn per completed delivery, work around your class schedule, and stay within familiar campus routes. Download the app to apply.',
+      "Yes. Apply through Campus Runs to join the rider network. You'll earn per completed delivery, work around your class schedule, and stay within familiar campus routes. Download the app to apply.",
   },
 ]
 
@@ -62,13 +65,17 @@ export function faqStructuredData(items: typeof faqItems, siteUrl: string) {
 }
 
 export default function FAQ({ items }: FAQProps) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  const toggle = (i: number) => setOpenIndex(prev => (prev === i ? null : i))
+
   return (
     <>
       <style>{`
         .faq-section {
           padding: 0 24px 96px;
           background: linear-gradient(180deg, #f6faff 0%, #eef5ff 100%);
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'Raleway', 'DM Sans', sans-serif;
         }
         .faq-shell {
           max-width: 1200px;
@@ -90,19 +97,20 @@ export default function FAQ({ items }: FAQProps) {
           gap: 8px;
           padding: 8px 16px;
           border-radius: 999px;
-          background: rgba(37,99,235,0.1);
-          color: #2563eb;
+          background: rgba(31,119,241,0.1);
+          color: #1f77f1;
           font-size: 12px;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.08em;
           margin-bottom: 16px;
-          font-family: 'Sora', sans-serif;
+          font-family: 'Raleway', sans-serif;
         }
         .faq-title {
           margin: 0;
-          font-family: 'Sora', sans-serif;
+          font-family: 'Raleway', sans-serif;
           font-size: clamp(2rem, 3vw, 2.8rem);
+          font-weight: 900;
           line-height: 1.08;
           letter-spacing: -0.03em;
           color: #0f172a;
@@ -112,40 +120,71 @@ export default function FAQ({ items }: FAQProps) {
           color: #64748b;
           line-height: 1.75;
           max-width: 720px;
+          font-family: 'Raleway', sans-serif;
         }
-        .faq-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 14px;
+        .faq-list {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
         }
         .faq-item {
-          border-radius: 22px;
-          padding: 22px 24px;
+          border-radius: 18px;
           background: #fff;
-          border: 1px solid #e2e8f0;
-          transition: border-color 0.2s, box-shadow 0.2s;
+          border: 1.5px solid #e2e8f0;
+          overflow: hidden;
+          transition: border-color 0.22s, box-shadow 0.22s;
         }
-        .faq-item:hover {
-          border-color: #bfdbfe;
-          box-shadow: 0 8px 20px rgba(37,99,235,0.07);
+        .faq-item.open {
+          border-color: rgba(31,119,241,0.35);
+          box-shadow: 0 8px 28px rgba(31,119,241,0.09);
         }
-        .faq-item h3 {
-          margin: 0 0 8px;
-          font-family: 'Sora', sans-serif;
+        .faq-trigger {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          padding: 20px 24px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          text-align: left;
+          font-family: 'Raleway', sans-serif;
           font-size: 1rem;
+          font-weight: 700;
           color: #0f172a;
           line-height: 1.4;
+          transition: color 0.18s;
         }
-        .faq-item p {
-          margin: 0;
+        .faq-trigger:hover {
+          color: #1f77f1;
+        }
+        .faq-item.open .faq-trigger {
+          color: #1f77f1;
+        }
+        .faq-icon-wrap {
+          flex-shrink: 0;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: rgba(31,119,241,0.08);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.22s, transform 0.3s;
+        }
+        .faq-item.open .faq-icon-wrap {
+          background: #1f77f1;
+        }
+        .faq-answer {
+          overflow: hidden;
+        }
+        .faq-answer-inner {
+          padding: 0 24px 20px;
           color: #64748b;
-          line-height: 1.7;
-          font-size: 0.93rem;
-        }
-        @media (max-width: 768px) {
-          .faq-grid {
-            grid-template-columns: 1fr;
-          }
+          line-height: 1.75;
+          font-size: 0.94rem;
+          font-family: 'Raleway', sans-serif;
         }
         @media (max-width: 640px) {
           .faq-section {
@@ -154,6 +193,13 @@ export default function FAQ({ items }: FAQProps) {
           .faq-card {
             padding: 26px 20px;
           }
+          .faq-trigger {
+            padding: 16px 18px;
+            font-size: 0.95rem;
+          }
+          .faq-answer-inner {
+            padding: 0 18px 16px;
+          }
         }
       `}</style>
 
@@ -161,20 +207,63 @@ export default function FAQ({ items }: FAQProps) {
         <div className="faq-shell">
           <div className="faq-card">
             <div className="faq-tag">
-              <span style={{ width: 8, height: 8, borderRadius: '999px', background: '#2563eb', display: 'inline-block' }} />
+              <span style={{ width: 8, height: 8, borderRadius: '999px', background: '#1f77f1', display: 'inline-block' }} />
               Frequently asked questions
             </div>
             <h2 id="faq-heading" className="faq-title">Got questions about Blorbmart?</h2>
             <p className="faq-copy">
               Everything students, sellers, and riders need to know about Nigeria's most student-focused campus marketplace.
             </p>
-            <div className="faq-grid">
-              {items.map((item) => (
-                <article key={item.question} className="faq-item">
-                  <h3>{item.question}</h3>
-                  <p>{item.answer}</p>
-                </article>
-              ))}
+
+            <div className="faq-list">
+              {items.map((item, i) => {
+                const isOpen = openIndex === i
+                return (
+                  <article key={item.question} className={`faq-item${isOpen ? ' open' : ''}`}>
+                    <button
+                      className="faq-trigger"
+                      onClick={() => toggle(i)}
+                      aria-expanded={isOpen}
+                    >
+                      <span>{item.question}</span>
+                      <motion.span
+                        className="faq-icon-wrap"
+                        animate={{ rotate: isOpen ? 45 : 0 }}
+                        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M7 1v12M1 7h12"
+                            stroke={isOpen ? '#fff' : '#1f77f1'}
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      </motion.span>
+                    </button>
+
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          className="faq-answer"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                          <p className="faq-answer-inner">{item.answer}</p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </article>
+                )
+              })}
             </div>
           </div>
         </div>

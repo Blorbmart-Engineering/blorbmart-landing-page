@@ -64,13 +64,13 @@ export default function Navbar() {
         }
         .nb-logo:hover { opacity: 0.88; }
         .nb-logo img {
-          height: 110px;
+          height: 220px;
           width: auto;
           object-fit: contain;
           display: block;
         }
         @media (max-width: 639px) {
-          .nb-logo img { height: 82px; }
+          .nb-logo img { height: 160px; }
         }
 
         /* ── Desktop nav ── */
