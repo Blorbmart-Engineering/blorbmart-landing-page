@@ -1,18 +1,20 @@
 import About from '../components/About'
-import CampusPartners from '../components/CampusPartners'
+import CommissionSection from '../components/CommissionSection'
 import FAQ, { faqItems, faqStructuredData } from '../components/FAQ'
+import FoodSection from '../components/FoodSection'
 import Hero from '../components/Hero'
 import HowItWorks from '../components/HowItWorks'
-import Insights from '../components/Insights'
 import MobileApp from '../components/MobileApp'
 import PageShell from '../components/PageShell'
 import RiderSection from '../components/RiderSection'
 import SEO from '../components/SEO'
+import SellerRulesSection from '../components/SellerRulesSection'
 import SellerSection from '../components/SellerSection'
 import SeoNotice from '../components/SeoNotice'
 import Team, { teamStructuredData } from '../components/Team'
 import { useRecentPosts } from '../hooks/useBlogPosts'
 import { siteConfig } from '../siteConfig'
+import Insights from '../components/Insights'
 
 const structuredData = [
   {
@@ -35,7 +37,7 @@ const structuredData = [
     sameAs: [
       'https://www.linkedin.com/company/blorbmart',
       'https://x.com/blorbmart',
-      'https://www.instagram.com/blorbmart',
+      'https://www.instagram.com/blorbmart_uniosun',
     ],
   },
   {
@@ -45,21 +47,8 @@ const structuredData = [
     url: siteConfig.siteUrl,
     name: 'Blorbmart',
     description:
-      'Blorbmart is a student marketplace that allows university students to buy and sell items easily on campus.',
-    publisher: {
-      '@id': `${siteConfig.siteUrl}/#organization`,
-    },
-    inLanguage: 'en-NG',
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Blog',
-    '@id': `${siteConfig.siteUrl}/blog#blog`,
-    url: `${siteConfig.siteUrl}/blog`,
-    name: 'Blorbmart Blog',
-    publisher: {
-      '@id': `${siteConfig.siteUrl}/#organization`,
-    },
+      'Blorbmart is a student marketplace for UNIOSUN — buy, sell, and order food on campus with fast delivery by Campus Runs.',
+    publisher: { '@id': `${siteConfig.siteUrl}/#organization` },
     inLanguage: 'en-NG',
   },
   {
@@ -67,14 +56,11 @@ const structuredData = [
     '@type': 'Product',
     '@id': `${siteConfig.siteUrl}/#marketplace`,
     name: 'Blorbmart Campus Marketplace',
-    category: 'Campus ecommerce platform',
-    brand: {
-      '@type': 'Brand',
-      name: 'Blorbmart',
-    },
+    category: 'Campus ecommerce and food delivery platform',
+    brand: { '@type': 'Brand', name: 'Blorbmart' },
     image: `${siteConfig.siteUrl}/32450.jpg`,
     description:
-      'Blorbmart is a Nigeria student marketplace and campus ecommerce platform for buying, selling, and delivering items within universities.',
+      'Blorbmart is a campus marketplace for UNIOSUN students. Buy and sell products, order food from local restaurants, and get fast delivery through Campus Runs.',
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -93,18 +79,19 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title="Blorbmart Campus Marketplace | Student Buy and Sell Platform in Nigeria"
-        description="Blorbmart is a student marketplace that allows university students to buy and sell items easily on campus. Discover trusted campus sellers, student riders, fast on-campus delivery, and blog resources for students."
+        title="Blorbmart | Campus Marketplace & Food Delivery for UNIOSUN Students"
+        description="Blorbmart is UNIOSUN's campus marketplace — order food from Mijas Pasta, Tasty Garnished Kitchen, and more. Buy and sell fashion, beauty, stationery, electronics, and more. Fast delivery by Campus Runs across Shasha, Nipco, URP Area, Cele, and beyond."
         keywords={[
-          'campus marketplace',
-          'student marketplace',
+          'campus marketplace UNIOSUN',
+          'student marketplace Nigeria',
+          'order food UNIOSUN',
+          'Mijas Pasta delivery',
+          'campus food delivery',
           'buy and sell on campus',
-          'Nigeria student marketplace',
-          'campus ecommerce platform',
-          'student buy and sell platform',
           'Blorbmart',
-          'campus delivery platform',
-          'student blog nigeria',
+          'Campus Runs delivery',
+          'student marketplace Osogbo',
+          'UNIOSUN student app',
         ]}
         canonical={siteConfig.siteUrl}
         image={`${siteConfig.siteUrl}${siteConfig.defaultOgImage}`}
@@ -113,11 +100,13 @@ export default function HomePage() {
       <PageShell>
         <main>
           <Hero />
+          <FoodSection />
           <About />
           <HowItWorks />
           <SellerSection />
+          <CommissionSection />
+          <SellerRulesSection />
           <RiderSection />
-          <CampusPartners />
           <Team />
           <Insights articles={recentPosts} />
           <SeoNotice />
